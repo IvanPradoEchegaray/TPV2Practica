@@ -49,6 +49,12 @@
     <Filter Include="Source Files\components">
       <UniqueIdentifier>{b9e08989-9a7b-4009-b920-7db4d7f75bd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Entities">
+      <UniqueIdentifier>{64102223-3d17-4a91-8efa-39296e382fb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{70b1cb47-27f5-44df-922f-26d030da4910}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
