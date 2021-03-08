@@ -8,6 +8,8 @@
 #include "../components/Rotate.h"
 #include "../components/Transform.h"
 #include "../components/Image.h"
+#include "../components/Generations.h"
+
 #include "../ecs/ecs.h"
 #include "../ecs/Entity.h"
 #include "../sdlutils/InputHandler.h"
@@ -28,16 +30,21 @@ void Game::init() {
 	SDLUtils::init("Ping Pong", 800, 600,
 			"resources/config/pingpong.resources.json");
 
-	auto *ball = mngr_->addEntity();
-	ball->addComponent<Transform>(
-			Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-			Vector2D(), 10.0f, 10.0f, 0.0f);
-	//ball->addComponent<Rectangle>(build_sdlcolor(0x112233ff));
-	ball->addComponent<Image>(&sdlutils().images().at("tennis_ball"));
-	ball->addComponent<Rotate>();
-	ball->addComponent<Bounce>();
+	//auto *ball = mngr_->addEntity();
+	//ball->addComponent<Transform>(
+	//		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
+	//		Vector2D(), 10.0f, 10.0f, 0.0f);
+	////ball->addComponent<Rectangle>(build_sdlcolor(0x112233ff));
+	//ball->addComponent<Image>(&sdlutils().images().at("tennis_ball"));
+	//ball->addComponent<Rotate>();
+	//ball->addComponent<Bounce>();
 
-
+	auto* asteroide = mngr_->addEntity();
+	asteroide->addComponent<Transform>(
+		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
+		Vector2D(), 30.0f, 30.0f, 0.0f);
+	asteroide->addComponent<Image>(&sdlutils().images().at("tennis_ball"));
+	asteroide->addComponent<Generations>();
 }
 
 void Game::start() {

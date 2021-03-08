@@ -130,4 +130,3 @@ private:
 	std::array<Component*, ecs::maxComponent> cmpArray_;
 	std::bitset<ecs::maxGroup> groups_;
 };
-
