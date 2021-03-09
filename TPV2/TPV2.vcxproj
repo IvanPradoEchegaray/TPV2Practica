@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="ecs\Entity.cpp" />
     <ClCompile Include="ecs\Manager.cpp" />
+    <ClCompile Include="Entities\Caza.cpp" />
     <ClCompile Include="game\Game.cpp" />
     <ClCompile Include="json\somplejson_demo.cpp" />
     <ClCompile Include="json\JSON.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="components\KeyBoardCtrl.h" />
     <ClInclude Include="components\Rectangle.h" />
     <ClInclude Include="components\Rotate.h" />
+    <ClInclude Include="components\ShowAtOppositeSide.h" />
     <ClInclude Include="components\Transform.h" />
     <ClInclude Include="ecs\Component.h" />
     <ClInclude Include="ecs\ecs.h" />
@@ -49,6 +51,7 @@
     <ClInclude Include="ecs\Entity.h" />
     <ClInclude Include="ecs\Manager.h" />
     <ClInclude Include="ecs\mpl.h" />
+    <ClInclude Include="Entities\Caza.h" />
     <ClInclude Include="game\ecs_defs.h" />
     <ClInclude Include="game\Game.h" />
     <ClInclude Include="json\simplejson_demo.h" />

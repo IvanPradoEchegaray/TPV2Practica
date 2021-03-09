@@ -96,6 +96,9 @@
     <ClCompile Include="game\Game.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\Caza.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="json\JSON.h">
@@ -195,6 +198,12 @@
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="components\Generations.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Caza.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="components\ShowAtOppositeSide.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
