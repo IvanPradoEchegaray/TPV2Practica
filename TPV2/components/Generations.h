@@ -17,11 +17,6 @@ public:
 		tr_->setH(10.0f + 5.0f * gen_);
 		tr_->setW(10.0f + 5.0f * gen_);
 	}
-
-	void update() override {
-
-	}
-
 private:
 	Transform* tr_;
 	float gen_;
