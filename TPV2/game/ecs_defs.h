@@ -10,6 +10,8 @@ class Bounce;
 class Image;
 class Rotate;
 class ShowAtOppositeSide;
+class DeAcceleration;
+class Health;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -18,7 +20,9 @@ class ShowAtOppositeSide;
 	Bounce,\
 	Image,\
 	Rotate,\
-	ShowAtOppositeSide
+	ShowAtOppositeSide,\
+	DeAcceleration,\
+	Health
 
 // groups
 
