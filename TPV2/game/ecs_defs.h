@@ -12,6 +12,9 @@ class Rotate;
 class ShowAtOppositeSide;
 class DeAcceleration;
 class Health;
+class Follow;
+class FramedImage;
+class Generations;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -22,7 +25,10 @@ class Health;
 	Rotate,\
 	ShowAtOppositeSide,\
 	DeAcceleration,\
-	Health
+	Health,\
+	Follow,\
+	FramedImage,\
+	Generations
 
 // groups
 
