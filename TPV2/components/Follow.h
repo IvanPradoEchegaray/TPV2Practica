@@ -28,7 +28,7 @@ public:
 		auto& v = tr_->getVel();
 		auto& q = cazaTr_->getPos();
 
-		v.rotate(v.angle(q - p) > 0 ? 1.0f : -1.0f);
+		v.set(v.rotate(v.angle(q - p) > 0 ? 1.0f : -1.0f));
 	}
 
 private:

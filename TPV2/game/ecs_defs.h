@@ -15,6 +15,7 @@ class Health;
 class Follow;
 class FramedImage;
 class Generations;
+class AsteroidManager;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -28,7 +29,8 @@ class Generations;
 	Health,\
 	Follow,\
 	FramedImage,\
-	Generations
+	Generations,\
+	AsteroidManager
 
 // groups
 
