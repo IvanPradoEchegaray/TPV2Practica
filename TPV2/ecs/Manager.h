@@ -43,10 +43,25 @@ public:
 	void update();
 	void render();
 	void refresh();
+	//Balas
+	Entity* addBullet() {
+		Entity* e = new Entity(this);
+		if (e != nullptr) {
+			e->resetGroups();
+			bullet_grp.emplace_back(e);
+			entities_.emplace_back(e);
+		}
+		return e;
+	}
+
+	inline const std::vector<Entity*>& getBullets() {
+		return bullet_grp;
+	}
 
 private:
 
 	std::vector<Entity*> entities_;
+	std::vector<Entity*> bullet_grp;
 	std::array<Entity*, ecs::maxHdlr> hdlrs_;
 
 };

@@ -3,12 +3,13 @@
 #include "Game.h"
 
 #include "../components/Bounce.h"
-#include "../components/KeyBoardCtrl.h"
+#include "../components/FighterCtrl.h"
 #include "../components/Rectangle.h"
 #include "../components/Rotate.h"
 #include "../components/Transform.h"
 #include "../components/Image.h"
 #include "../components/Health.h"
+#include "../components/ShowAtOppositeSide.h"
 #include "../components/DeAcceleration.h"
 #include "../components/Generations.h"
 
@@ -32,17 +33,17 @@ void Game::init() {
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroids.resources.json");
 
-	auto *ball = mngr_->addEntity();
-	ball->addComponent<Transform>(
+	auto *player = mngr_->addEntity();
+	player->addComponent<Transform>(
 			Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-			Vector2D(-1.0f,0.0f), 40.0f, 40.0f, 0.0f);
-	////ball->addComponent<Rectangle>(build_sdlcolor(0x112233ff));
-	ball->addComponent<Image>(&sdlutils().images().at("fighter"));
-	ball->addComponent<DeAcceleration>();
-	ball->addComponent<Health>(3);
-	//ball->addComponent<Rotate>();
-	//ball->addComponent<Bounce>();
-
+			Vector2D(0.0f,0.0f), 40.0f, 40.0f, 0.0f);
+	player->addComponent<Image>(&sdlutils().images().at("fighter"));
+	player->addComponent<DeAcceleration>();
+	player->addComponent<Health>(3,
+		Vector2D(sdlutils().width() * 0.02f, sdlutils().height() * 0.02f), 40.0f, 40.0f, 
+		&sdlutils().images().at("heart"));
+	player->addComponent<FighterCtrl>();
+	player->addComponent<ShowAtOppositeSide>();
 }
 
 void Game::start() {

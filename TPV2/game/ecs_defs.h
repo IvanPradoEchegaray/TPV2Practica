@@ -5,11 +5,12 @@
 // components -- forward declaration, i.e., assume they are defined somewhere
 class Transform;
 class Rectangle;
-class KeyBoardCtrl;
+class FighterCtrl;
 class Bounce;
 class Image;
 class Rotate;
 class ShowAtOppositeSide;
+class DisableOnExit;
 class DeAcceleration;
 class Health;
 class Follow;
@@ -20,11 +21,12 @@ class AsteroidManager;
 #define _CMPS_LIST_  \
 	Transform,\
 	Rectangle,\
-	KeyBoardCtrl,\
+	FighterCtrl,\
 	Bounce,\
 	Image,\
 	Rotate,\
 	ShowAtOppositeSide,\
+	DisableOnExit,\
 	DeAcceleration,\
 	Health,\
 	Follow,\

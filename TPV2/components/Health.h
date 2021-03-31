@@ -6,27 +6,33 @@
 
 class Health : public Component {
 public:
-	Health(size_t vidas_) : vidas(vidas_) {
+	Health(size_t vidas, Vector2D pos, float w, float h, Texture* tex) : max_vidas_(vidas), pos_(pos), width_(w), heigth_(h), tex_(tex) {
 	}
 	virtual ~Health() {
 	}
 	void init() override {
-		hearts.reserve(vidas);
-		for (int i = 0; i < vidas; i++) {
-			hearts.emplace_back(new Entity(nullptr));
-			hearts[i]->addComponent<Transform>(Vector2D(sdlutils().width() * 0.1f, sdlutils().height() * 0.1f),
-				Vector2D(), 30.0f, 30.0f, 0.0f);
-			hearts[i]->addComponent<Image>(&sdlutils().images().at("heart"));
+		reset();
+	}
+	void render()override {
+		for (int i = 0; i < vidas_; i++) {
+			Vector2D pos = Vector2D(pos_.getX() + width_ * i, pos_.getY());
+			SDL_Rect dest = build_sdlrect(pos, width_, heigth_);
+			tex_->render(dest, 0);
 		}
 	}
 
-	void update() override {
-		if (hearts.size() != vidas) {
-			hearts.resize(vidas);
-		}
+	bool LoseLife() { 
+		vidas_--; 
+		if (vidas_ <= 0) return true;
+		else return false;
 	}
+	const size_t& getLifes() { return vidas_; }
+	void reset() { vidas_ = max_vidas_; }
 
 private:
-	size_t vidas;
-	std::vector<Entity*> hearts;
+	Texture* tex_;
+	Vector2D pos_;
+	float width_, heigth_;
+	size_t vidas_; 
+	size_t max_vidas_;
 };
