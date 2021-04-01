@@ -17,6 +17,7 @@ class Follow;
 class FramedImage;
 class Generations;
 class AsteroidsManager;
+class Gun;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -32,6 +33,7 @@ class AsteroidsManager;
 	Follow,\
 	FramedImage,\
 	Generations,\
+	Gun,\
 	AsteroidsManager
 
 // groups

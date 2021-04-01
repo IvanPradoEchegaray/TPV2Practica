@@ -9,6 +9,7 @@
 #include "../components/Transform.h"
 #include "../components/Image.h"
 #include "../components/Health.h"
+#include "../components/Gun.h"
 #include "../components/ShowAtOppositeSide.h"
 #include "../components/DeAcceleration.h"
 #include "../components/Generations.h"
@@ -44,6 +45,7 @@ void Game::init() {
 		Vector2D(sdlutils().width() * 0.02f, sdlutils().height() * 0.02f), 40.0f, 40.0f, 
 		&sdlutils().images().at("heart"));
 	player->addComponent<FighterCtrl>();
+	player->addComponent<Gun>();
 	player->addComponent<ShowAtOppositeSide>();
 
 	auto* GameManager = mngr_->addEntity();
@@ -82,4 +84,3 @@ void Game::start() {
 	}
 
 }
-

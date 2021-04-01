@@ -22,20 +22,9 @@ public:
 		auto w = tr_->getW();
 		auto h = tr_->getH();
 
-		if (pos.getX() < 0) {
-			this->getEntity()->setActive(false);
+		if (pos.getX() < 0 || pos.getX() + w > sdlutils().width() || pos.getY() < 0 || pos.getY() + h > sdlutils().height()) {
+			entity_->setActive(false);
 		}
-		else if (pos.getX() + w > sdlutils().width()) {
-			this->getEntity()->setActive(false);
-		}
-
-		if (pos.getY() < 0) {
-			this->getEntity()->setActive(false);
-		}
-		else if (pos.getY() + h > sdlutils().height()) {
-			this->getEntity()->setActive(false);
-		}
-
 
 	}
 

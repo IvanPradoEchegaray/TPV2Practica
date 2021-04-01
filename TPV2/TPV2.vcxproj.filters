@@ -212,5 +212,14 @@
     <ClInclude Include="components\AsteroidsManager.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
+    <ClInclude Include="components\Gun.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\State.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\GameCtrl.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
