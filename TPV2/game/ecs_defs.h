@@ -16,7 +16,7 @@ class Health;
 class Follow;
 class FramedImage;
 class Generations;
-class AsteroidManager;
+class AsteroidsManager;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -32,12 +32,15 @@ class AsteroidManager;
 	Follow,\
 	FramedImage,\
 	Generations,\
-	AsteroidManager
+	AsteroidsManager
 
 // groups
 
-struct Group_1;
-#define _GRPS_LIST_  Group_1
+struct Bullet_grp;
+#define _GRPS_LIST_ Bullet_grp
+
+struct Asteroid_grp;
+#define _GRPS_LIST_  Asteroid_grp
 
 // handlers
 struct Hdlr_1;

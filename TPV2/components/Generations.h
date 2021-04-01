@@ -17,6 +17,11 @@ public:
 		tr_->setH(20.0f + 10.0f * gen_);
 		tr_->setW(20.0f + 10.0f * gen_);
 	}
+
+	int getGenerations() {
+		return gen_;
+	}
+
 private:
 	Transform* tr_;
 	float gen_;

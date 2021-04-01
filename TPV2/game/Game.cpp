@@ -12,6 +12,7 @@
 #include "../components/ShowAtOppositeSide.h"
 #include "../components/DeAcceleration.h"
 #include "../components/Generations.h"
+#include "../components/AsteroidsManager.h"
 
 #include "../ecs/ecs.h"
 #include "../ecs/Entity.h"
@@ -44,6 +45,9 @@ void Game::init() {
 		&sdlutils().images().at("heart"));
 	player->addComponent<FighterCtrl>();
 	player->addComponent<ShowAtOppositeSide>();
+
+	auto* GameManager = mngr_->addEntity();
+	GameManager->addComponent<AsteroidsManager>(player);
 }
 
 void Game::start() {
