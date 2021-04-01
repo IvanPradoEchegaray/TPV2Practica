@@ -18,6 +18,8 @@ class FramedImage;
 class Generations;
 class AsteroidsManager;
 class Gun;
+class State;
+class GameCtrl;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -34,15 +36,18 @@ class Gun;
 	FramedImage,\
 	Generations,\
 	Gun,\
-	AsteroidsManager
+	AsteroidsManager,\
+	State,\
+	GameCtrl
 
 // groups
 
 struct Bullet_grp;
-#define _GRPS_LIST_ Bullet_grp
-
 struct Asteroid_grp;
-#define _GRPS_LIST_  Asteroid_grp
+
+#define _GRPS_LIST_ \
+	Bullet_grp,\
+	Asteroid_grp
 
 // handlers
 struct Hdlr_1;
