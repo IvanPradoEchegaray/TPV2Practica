@@ -5,7 +5,6 @@
 
 #include "../ecs/Component.h"
 #include "../sdlutils/InputHandler.h"
-#include "../sdlutils/SDLUtils.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "AsteroidsManager.h"

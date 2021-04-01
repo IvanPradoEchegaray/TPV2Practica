@@ -14,6 +14,8 @@
 #include "../components/DeAcceleration.h"
 #include "../components/Generations.h"
 #include "../components/AsteroidsManager.h"
+#include "../components/State.h"
+#include "../components/GameCtrl.h"
 
 #include "../ecs/ecs.h"
 #include "../ecs/Entity.h"
