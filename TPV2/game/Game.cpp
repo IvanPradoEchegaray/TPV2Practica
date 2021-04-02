@@ -36,10 +36,10 @@ void Game::init() {
 
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroids.resources.json");
-
+	//Player Entidad
 	auto *player = mngr_->addEntity();
 	player->addComponent<Transform>(
-			Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
+			Vector2D(sdlutils().width() / 2.0f - 20, sdlutils().height() / 2.0f - 20),
 			Vector2D(0.0f,0.0f), 40.0f, 40.0f, 0.0f);
 	player->addComponent<Image>(&sdlutils().images().at("fighter"));
 	player->addComponent<DeAcceleration>();
@@ -49,9 +49,12 @@ void Game::init() {
 	player->addComponent<FighterCtrl>();
 	player->addComponent<Gun>();
 	player->addComponent<ShowAtOppositeSide>();
+	//gameManager Entidad
+	auto* gameManager = mngr_->addEntity();
+	gameManager->addComponent<State>();
+	gameManager->addComponent<GameCtrl>();
+	gameManager->addComponent<AsteroidsManager>(player);
 
-	auto* GameManager = mngr_->addEntity();
-	GameManager->addComponent<AsteroidsManager>(player);
 }
 
 void Game::start() {

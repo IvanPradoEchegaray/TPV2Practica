@@ -22,14 +22,18 @@ public:
 
 	void update() override {
 		if (ih().keyDownEvent()) {
-			if (ih().isKeyDown(SDLK_SPACE)) {
+			if (ih().isKeyDown(SDLK_SPACE) && entity_->getComponent<State>()->getState() != RUNNING) {
+				entity_->getComponent<State>()->run();
+				//Crea 10 asteroides
+				for (int i = 0; i < 10; i++)
+					entity_->getComponent<AsteroidsManager>()->generaAsteroide();
 				
 			}
 		}
+
 	}
 
 
 private:
-	enum state { NEWGAME, PAUSED, RUNNING, GAMEOVER };
 }
 ;

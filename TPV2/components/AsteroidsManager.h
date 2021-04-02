@@ -17,10 +17,6 @@ public:
 
 	void init() override {
 		mngr_ = entity_->getMngr();
-		for (int i = 0; i < 10; i++) {
-			generaAsteroide();
-		}
-
 		startTime_ = sdlutils().currRealTime();
 	}
 

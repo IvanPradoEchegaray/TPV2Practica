@@ -1,7 +1,6 @@
 #pragma once
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
-#include "Image.h"
 #include "../sdlutils/SDLUtils.h"
 
 class Health : public Component {
