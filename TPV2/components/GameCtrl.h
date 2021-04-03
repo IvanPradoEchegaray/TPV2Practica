@@ -32,9 +32,9 @@ public:
 		}
 		//Desactvar input en start, pausa y gameover
 		if (entity_->getComponent<State>()->getState() != RUNNING)
-			player_->getComponent<FighterCtrl>()->ableInput(false);
+			player_->getComponent<FighterCtrl>()->enableInput(false);
 		else
-			player_->getComponent<FighterCtrl>()->ableInput(true);
+			player_->getComponent<FighterCtrl>()->enableInput(true);
 
 	}
 

@@ -10,7 +10,7 @@ public:
 	virtual ~Health() {
 	}
 	void init() override {
-		reset();
+		resetLifes();
 	}
 	void render()override {
 		for (int i = 0; i < vidas_; i++) {
@@ -22,8 +22,11 @@ public:
 
 	void loseLife() { vidas_--; }
 	const size_t& getLifes() { return vidas_; }
-	bool isDead() { if (vidas_ <= 0) return true; }
-	void reset() { vidas_ = max_vidas_; }
+	bool isDead() {
+		if (vidas_ <= 0) return true;
+		else return false;
+	}
+	void resetLifes() { vidas_ = max_vidas_; }
 
 private:
 	Texture* tex_;

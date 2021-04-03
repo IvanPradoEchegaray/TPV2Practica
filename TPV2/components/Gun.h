@@ -27,7 +27,7 @@ public:
 
 	void update() override {
 		if (ih().keyDownEvent()) {
-			if (ih().isKeyDown(SDLK_s)) {
+			if (ih().isKeyDown(SDLK_s) && entity_->getComponent<FighterCtrl>()->inputIsEnabled()) {
 				createBullet();
 			}
 		}

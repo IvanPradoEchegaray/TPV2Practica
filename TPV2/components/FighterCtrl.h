@@ -50,7 +50,8 @@ public:
 		return newVel;
 	}
 
-	void ableInput(bool state) { ableInput_ = state; }
+	void enableInput(bool state) { ableInput_ = state; }
+	const bool& inputIsEnabled() { return ableInput_; }
 private:
 	Transform *tr_;
 	float thrust_;

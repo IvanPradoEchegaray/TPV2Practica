@@ -59,8 +59,10 @@ public:
 				e->setActive(false);
 		}
 		//Si no le quedan vidas al player
-		if (player_->getComponent<Health>()->isDead())
+		if (player_->getComponent<Health>()->isDead()) {
 			entity_->getComponent<State>()->gameOver();
+			player_->getComponent<Health>()->resetLifes();
+		}
 		else
 			entity_->getComponent<State>()->pause();
 	
@@ -71,12 +73,12 @@ public:
 		auto& player_pos = player_tr->getPos();
 		player_pos.setX(sdlutils().width() / 2.0f - 20);
 		player_pos.setY(sdlutils().height() / 2.0f - 20);
+		//Rotacion
+		player_tr->setRot(0);
 		//Velocidad
 		auto& player_vel = player_tr->getVel();
 		player_vel.setX(0);
 		player_vel.setY(0);
-		//Rotacion
-		player_tr->setRot(0);
 	}
 
 private:
