@@ -35,6 +35,8 @@ public:
 			auto &vel = tr_->getVel();
 			if (ih().isKeyDown(SDLK_UP)) {
 				vel = speedUp(vel,tr_->getRot());
+				//Sonido a reproducir
+				sdlutils().soundEffects().at("thrust").play();
 			} if (ih().isKeyDown(SDLK_LEFT)) {
 				tr_->setRot(tr_->getRot() - 5.0f);
 			} else if (ih().isKeyDown(SDLK_RIGHT)) {

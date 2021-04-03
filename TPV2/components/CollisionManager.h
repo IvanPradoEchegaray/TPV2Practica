@@ -31,8 +31,11 @@ public:
 				//Si hay choque con el caza
 				Transform* player_tr = player_->getComponent<Transform>();
 				if (Collisions::collidesWithRotation(asteroid_tr->getPos(), asteroid_tr->getW(), asteroid_tr->getH(), asteroid_tr->getRot(),
-					player_tr->getPos(), player_tr->getW(), player_tr->getH(), player_tr->getRot()))
+					player_tr->getPos(), player_tr->getW(), player_tr->getH(), player_tr->getRot())) {
 					resetAll();
+					//Sonido a reproducir
+					sdlutils().soundEffects().at("explosion").play();
+				}
 
 				//Balas activas
 				for (int j = 0; j < entity_->getMngr()->getEntities().size(); j++) {
@@ -41,6 +44,8 @@ public:
 						Transform* bullet_tr = bullet->getComponent<Transform>();
 						if (Collisions::collidesWithRotation(bullet_tr->getPos(), bullet_tr->getW(), bullet_tr->getH(), bullet_tr->getRot(),
 							asteroid_tr->getPos(), asteroid_tr->getW(), asteroid_tr->getH(), asteroid_tr->getRot())) {
+							//Sonido a reproducir
+							sdlutils().soundEffects().at("bangSmall").play();
 							bullet->setActive(false);
 							AsteroidsManager* mngr_asteroids = entity_->getComponent<AsteroidsManager>();
 							mngr_asteroids->OnCollision(asteroid);
