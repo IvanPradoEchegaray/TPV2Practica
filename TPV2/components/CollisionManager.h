@@ -15,8 +15,7 @@
 
 class CollisionManager : public Component {
 public:
-	CollisionManager(Entity* player) :  player_(player){
-	}
+	CollisionManager(Entity* player) : player_(player) {}
 	virtual ~CollisionManager() {
 	}
 
@@ -36,10 +35,18 @@ public:
 				{
 					resetAll();
 				}
-			}
-		}
-	}
 
+				//Balas activas
+				for (int j = 0; j < entity_->getMngr()->getEntities().size(); j++) {
+					if (entity_->getMngr()->getEntities()[j]->hasGroup<Bullet_grp>() && entity_->getMngr()->getEntities()[j]->isActive()) {
+						Entity* bullet = entity_->getMngr()->getEntities()[j];
+						Transform* bullet_tr = bullet->getComponent<Transform>();
+						if (Collisions::collidesWithRotation(bullet_tr->getPos(), bullet_tr->getW(), bullet_tr->getH(), bullet_tr->getRot(),
+															 asteroid_tr->getPos(), asteroid_tr->getW(), asteroid_tr->getH(), asteroid_tr->getRot())) {
+							bullet->setActive(false);
+							AsteroidsManager* amngr;
+							amngr->OnCollision(asteroid);
+							if (amngr->getNumAsteroides() < 1) {
 	void resetAll() {
 		player_->getComponent<Health>()->loseLife();
 		//Desactivar asteroides y balas
@@ -51,6 +58,14 @@ public:
 		if (player_->getComponent<Health>()->isDead()) 
 			entity_->getComponent<State>()->gameOver();
 
+								//resetAll();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 		else 
 			entity_->getComponent<State>()->pause();
 

@@ -8,6 +8,7 @@
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
 #include "../game/Game.h"
+#include "State.h"
 
 class AsteroidsManager : public Component {
 public:
@@ -25,10 +26,12 @@ public:
 		std::cout << nAsteroides_ << "\n";
 
 		//Genera 1 asteroide nuevo cada 5 segundos
-		Uint32 currentTime = sdlutils().currRealTime() - startTime_;
-		if (currentTime >= 5000) {
-			startTime_ = sdlutils().currRealTime();
-			generaAsteroide();
+		if (entity_->getComponent<State>()->getState() == RUNNING) {
+			Uint32 currentTime = sdlutils().currRealTime() - startTime_;
+			if (currentTime >= 5000) {
+				startTime_ = sdlutils().currRealTime();
+				generaAsteroide();
+			}
 		}
 	}
 
@@ -37,13 +40,17 @@ public:
 	}
 
 	void OnCollision(Entity* asteroide) {
-		collisionTr_ = asteroide->getComponent<Transform>();
-		assert(collisionTr_ != nullptr);
 
-		gen_ = asteroide->getComponent<Generations>()->getGenerations();
+		int gen = asteroide->getComponent<Generations>()->getGenerations();
+		if (gen > 0) {
+			collisionTr_ = asteroide->getComponent<Transform>();
+			assert(collisionTr_ != nullptr);
+			Vector2D pos = collisionTr_->getPos();
+			Vector2D vel = collisionTr_->getVel();
 
-		auto& p = collisionTr_->getPos();
-		auto& v = collisionTr_->getVel();
+			divideAsteroide(gen, pos, vel);
+			divideAsteroide(gen, pos, vel);
+		}
 
 		asteroide->setActive(false);
 	}
@@ -75,20 +82,48 @@ public:
 		//DIFERENCIACION DE TIPOS
 		if (sdlutils().rand().nextInt(0, 10) < 3) {
 			//Debug Log
-			std::cout << "--" << colu << ", " << fil << " TIPO B --\n";
+			//std::cout << "--" << colu << ", " << fil << " TIPO B --\n";
 			asteroid->addComponent<Follow>(player_);
 			asteroid->addComponent<FramedImage>(&sdlutils().images().at("asteroid_gold"), 5, 6, 2, 0);
 		}
 
 		else {
 			//Debug Log
-			std::cout << "--" << colu << ", " << fil << " TIPO B --\n";
+			//std::cout << "--" << colu << ", " << fil << " TIPO B --\n";
 			asteroid->addComponent<FramedImage>(&sdlutils().images().at("asteroid"), 5, 6, 2, 0);
 		}
+
+		asteroid->setGroup<Asteroid_grp>(true);
+	}
+
+	void divideAsteroide(int gen, Vector2D p, Vector2D v) {
+		auto* asteroid = mngr_->addEntity();
+		nAsteroides_++;
+
+		asteroid->addComponent<Transform>(p, v, 40.0f, 40.0f, 0.0f);
+		//Generations tiene que ir después del transform.
+		asteroid->addComponent<Generations>(gen - 1);
+		
+		float w = asteroid->getComponent<Transform>()->getW();
+		int r = sdlutils().rand().nextInt(0, 360);
+		p.set(p + v.rotate(r) * 2 * w);
+		v.set(v.rotate(r) * 1.1f);
+
+		//DIFERENCIACION DE TIPOS
+		if (sdlutils().rand().nextInt(0, 10) < 3) {
+			//Debug Log
+			asteroid->addComponent<Follow>(player_);
+			asteroid->addComponent<FramedImage>(&sdlutils().images().at("asteroid_gold"), 5, 6, 2, 0);
+		}
+
+		else {
+			//Debug Log
+			asteroid->addComponent<FramedImage>(&sdlutils().images().at("asteroid"), 5, 6, 2, 0);
+		}
+		asteroid->setGroup<Asteroid_grp>(true);
 	}
 private:
 	Transform* collisionTr_;
-	int gen_;
 	Manager* mngr_;
 	Entity* player_;
 	int nAsteroides_;

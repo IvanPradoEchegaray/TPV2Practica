@@ -7,6 +7,7 @@
 class Generations: public Component {
 public:
 	Generations() : tr_(nullptr), gen_(sdlutils().rand().nextInt(1, 4)) {}
+	Generations(int i) : tr_(nullptr), gen_(i) {}
 
 	virtual ~Generations() {}
 
@@ -14,8 +15,8 @@ public:
 		tr_ = entity_->getComponent<Transform>();
 	    assert(tr_ != nullptr);
 
-		tr_->setH(20.0f + 10.0f * gen_);
-		tr_->setW(20.0f + 10.0f * gen_);
+		tr_->setH(14.0f + 7.0f * gen_);
+		tr_->setW(14.0f + 7.0f * gen_);
 	}
 
 	int getGenerations() {
