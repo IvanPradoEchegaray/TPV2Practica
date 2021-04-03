@@ -20,12 +20,9 @@ public:
 		}
 	}
 
-	bool LoseLife() { 
-		vidas_--; 
-		if (vidas_ <= 0) return true;
-		else return false;
-	}
+	void loseLife() { vidas_--; }
 	const size_t& getLifes() { return vidas_; }
+	bool isDead() { if (vidas_ <= 0) return true; }
 	void reset() { vidas_ = max_vidas_; }
 
 private:

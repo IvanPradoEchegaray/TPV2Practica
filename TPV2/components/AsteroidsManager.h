@@ -32,7 +32,7 @@ public:
 		}
 	}
 
-	int getNumAsteroides() {
+	const int& getNumAsteroides() {
 		return nAsteroides_;
 	}
 

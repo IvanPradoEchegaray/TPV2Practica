@@ -14,7 +14,7 @@ public:
 	}
 	virtual ~State() {}
 
-	void init() override { gameOver(); }
+	void init() override { start(); }
 
 	void render() override {
 		Vector2D pos = Vector2D(sdlutils().width() * 0.5f - 175, sdlutils().height() * 0.65f);

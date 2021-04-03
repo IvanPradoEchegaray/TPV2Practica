@@ -16,6 +16,7 @@
 #include "../components/AsteroidsManager.h"
 #include "../components/State.h"
 #include "../components/GameCtrl.h"
+#include "../components/CollisionManager.h"
 
 #include "../ecs/ecs.h"
 #include "../ecs/Entity.h"
@@ -54,6 +55,7 @@ void Game::init() {
 	gameManager->addComponent<State>();
 	gameManager->addComponent<GameCtrl>();
 	gameManager->addComponent<AsteroidsManager>(player);
+	gameManager->addComponent<CollisionManager>(player);
 
 }
 
