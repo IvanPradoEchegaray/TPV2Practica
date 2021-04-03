@@ -20,6 +20,7 @@ class AsteroidsManager;
 class Gun;
 class State;
 class GameCtrl;
+class CollisionManager;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -38,7 +39,8 @@ class GameCtrl;
 	Gun,\
 	AsteroidsManager,\
 	State,\
-	GameCtrl
+	GameCtrl,\
+	CollisionManager
 
 // groups
 

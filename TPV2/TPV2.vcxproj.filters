@@ -221,5 +221,8 @@
     <ClInclude Include="components\GameCtrl.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
+    <ClInclude Include="components\CollisionManager.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
