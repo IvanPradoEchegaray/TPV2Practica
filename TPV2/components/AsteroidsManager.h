@@ -106,8 +106,10 @@ public:
 		
 		float w = asteroid->getComponent<Transform>()->getW();
 		int r = sdlutils().rand().nextInt(0, 360);
-		p.set(p + v.rotate(r) * 2 * w);
-		v.set(v.rotate(r) * 1.1f);
+		auto& pos = asteroid->getComponent<Transform>()->getPos();
+		auto& vel = asteroid->getComponent<Transform>()->getVel();
+		pos.set(pos + vel.rotate(r) * 2 * w);
+		vel.set(vel.rotate(r) * 1.1f);
 
 		//DIFERENCIACION DE TIPOS
 		if (sdlutils().rand().nextInt(0, 10) < 3) {
