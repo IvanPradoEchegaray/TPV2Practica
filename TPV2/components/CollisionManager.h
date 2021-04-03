@@ -30,11 +30,9 @@ public:
 				Transform* asteroid_tr = asteroid->getComponent<Transform>();
 				//Si hay choque con el caza
 				Transform* player_tr = player_->getComponent<Transform>();
-				if(Collisions::collidesWithRotation(asteroid_tr->getPos(), asteroid_tr->getW(), asteroid_tr->getH(), asteroid_tr->getRot(),
-													player_tr->getPos(), player_tr->getW(), player_tr->getH(), player_tr->getRot()))
-				{
+				if (Collisions::collidesWithRotation(asteroid_tr->getPos(), asteroid_tr->getW(), asteroid_tr->getH(), asteroid_tr->getRot(),
+					player_tr->getPos(), player_tr->getW(), player_tr->getH(), player_tr->getRot()))
 					resetAll();
-				}
 
 				//Balas activas
 				for (int j = 0; j < entity_->getMngr()->getEntities().size(); j++) {
@@ -42,11 +40,17 @@ public:
 						Entity* bullet = entity_->getMngr()->getEntities()[j];
 						Transform* bullet_tr = bullet->getComponent<Transform>();
 						if (Collisions::collidesWithRotation(bullet_tr->getPos(), bullet_tr->getW(), bullet_tr->getH(), bullet_tr->getRot(),
-															 asteroid_tr->getPos(), asteroid_tr->getW(), asteroid_tr->getH(), asteroid_tr->getRot())) {
+							asteroid_tr->getPos(), asteroid_tr->getW(), asteroid_tr->getH(), asteroid_tr->getRot())) {
 							bullet->setActive(false);
-							AsteroidsManager* amngr;
-							amngr->OnCollision(asteroid);
-							if (amngr->getNumAsteroides() < 1) {
+							AsteroidsManager* mngr_asteroids = entity_->getComponent<AsteroidsManager>();
+							mngr_asteroids->OnCollision(asteroid);
+							if (mngr_asteroids->getNumAsteroides() < 1) resetAll();
+						}
+					}
+				}
+			}
+		}
+	}
 	void resetAll() {
 		player_->getComponent<Health>()->loseLife();
 		//Desactivar asteroides y balas
@@ -55,25 +59,23 @@ public:
 				e->setActive(false);
 		}
 		//Si no le quedan vidas al player
-		if (player_->getComponent<Health>()->isDead()) 
+		if (player_->getComponent<Health>()->isDead())
 			entity_->getComponent<State>()->gameOver();
-
-								//resetAll();
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-		else 
+		else
 			entity_->getComponent<State>()->pause();
+	
 
 		//Reset de la posicion del player
 		Transform* player_tr = player_->getComponent<Transform>();
+		//Posicion
 		auto& player_pos = player_tr->getPos();
 		player_pos.setX(sdlutils().width() / 2.0f - 20);
 		player_pos.setY(sdlutils().height() / 2.0f - 20);
+		//Velocidad
+		auto& player_vel = player_tr->getVel();
+		player_vel.setX(0);
+		player_vel.setY(0);
+		//Rotacion
 		player_tr->setRot(0);
 	}
 

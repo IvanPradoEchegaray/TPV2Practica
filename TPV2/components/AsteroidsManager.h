@@ -23,7 +23,7 @@ public:
 
 	void update() override {
 		//Debug Log
-		std::cout << nAsteroides_ << "\n";
+		//std::cout << nAsteroides_ << "\n";
 
 		//Genera 1 asteroide nuevo cada 5 segundos
 		if (entity_->getComponent<State>()->getState() == RUNNING) {

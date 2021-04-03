@@ -53,7 +53,7 @@ void Game::init() {
 	//gameManager Entidad
 	auto* gameManager = mngr_->addEntity();
 	gameManager->addComponent<State>();
-	gameManager->addComponent<GameCtrl>();
+	gameManager->addComponent<GameCtrl>(player);
 	gameManager->addComponent<AsteroidsManager>(player);
 	gameManager->addComponent<CollisionManager>(player);
 

@@ -27,10 +27,11 @@ public:
 	void init() override {
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
+		ableInput_ = false;
 	}
 
 	void update() override {
-		if (ih().keyDownEvent()) {
+		if (ih().keyDownEvent() && ableInput_) {
 			auto &vel = tr_->getVel();
 			if (ih().isKeyDown(SDLK_UP)) {
 				vel = speedUp(vel,tr_->getRot());
@@ -49,10 +50,12 @@ public:
 		return newVel;
 	}
 
+	void ableInput(bool state) { ableInput_ = state; }
 private:
 	Transform *tr_;
 	float thrust_;
 	float speedLimit_;
+	bool ableInput_;
 }
 ;
 

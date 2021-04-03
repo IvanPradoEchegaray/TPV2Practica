@@ -12,7 +12,7 @@
 
 class GameCtrl : public Component {
 public:
-	GameCtrl() {
+	GameCtrl(Entity* player):player_(player) {
 	}
 	virtual ~GameCtrl() {
 	}
@@ -30,10 +30,16 @@ public:
 				
 			}
 		}
+		//Desactvar input en start, pausa y gameover
+		if (entity_->getComponent<State>()->getState() != RUNNING)
+			player_->getComponent<FighterCtrl>()->ableInput(false);
+		else
+			player_->getComponent<FighterCtrl>()->ableInput(true);
 
 	}
 
 
 private:
+	Entity* player_;
 }
 ;
