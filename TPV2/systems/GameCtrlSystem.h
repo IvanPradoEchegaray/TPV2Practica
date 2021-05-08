@@ -1,6 +1,10 @@
 #pragma once
 #include "../ecs/System.h"
 #include "../components/State.h"
+#include "../components/Health.h"
+#include "../sdlutils/InputHandler.h"
+#include "../components/AsteroidsManager.h"
+#include "../components/FighterCtrl.h"
 
 class GameCtrlSystem : public System
 {

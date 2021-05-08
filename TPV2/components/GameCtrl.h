@@ -17,10 +17,10 @@ public:
 	virtual ~GameCtrl() {
 	}
 
-	void init() override {
+	void init() {
 	}
 
-	void update() override {
+	void update() {
 		if (ih().keyDownEvent()) {
 			if (ih().isKeyDown(SDLK_SPACE) && entity_->getComponent<State>()->getState() != RUNNING) {
 				entity_->getComponent<State>()->run();
