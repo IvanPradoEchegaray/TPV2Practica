@@ -17,13 +17,12 @@ void GameCtrlSystem::onFighterDeath() {
 }
 
 void GameCtrlSystem::onAsteroidsExtinction() {
-	manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->loseLife();
 	//Desactivar asteroides y balas
 	for (Entity* e : manager_->getEntities()) {
 		if (manager_->hasGroup<Bullet_grp>(e))
 			manager_->setActive(e, false);
 	}
-	//Si no le quedan vidas al player
+
 	manager_->getComponent<State>(manager_->getHandler<GameManager>())->gameOver();
 	manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->resetLifes();
 	manager_->getComponent<State>(manager_->getHandler<GameManager>())->pause();
