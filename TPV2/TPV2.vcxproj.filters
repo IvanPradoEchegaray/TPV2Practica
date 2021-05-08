@@ -275,6 +275,9 @@
     <ClInclude Include="systems\BulletsSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
+    <ClInclude Include="components\AsteroidType.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
     <ClInclude Include="sdlutils\Messages.h">
       <Filter>Header Files\sdlutils</Filter>
     </ClInclude>

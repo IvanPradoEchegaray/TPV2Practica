@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components\AsteroidsManager.h" />
+    <ClInclude Include="components\AsteroidType.h" />
     <ClInclude Include="components\Bounce.h" />
     <ClInclude Include="components\CollisionManager.h" />
     <ClInclude Include="components\DeAcceleration.h" />

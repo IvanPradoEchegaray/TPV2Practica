@@ -4,6 +4,7 @@
 #include "../ecs/Entity.h"
 #include "../components/Transform.h"
 #include "../components/AsteroidsManager.h"
+#include "../components/AsteroidType.h"
 
 using namespace std;
 

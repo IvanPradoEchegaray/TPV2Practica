@@ -4,6 +4,7 @@
 #include "Follow.h"
 #include "Generations.h"
 #include "Transform.h"
+#include "AsteroidType"
 
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
@@ -51,8 +52,6 @@ public:
 			divideAsteroide(gen, pos, vel);
 			divideAsteroide(gen, pos, vel);
 		}
-
-		asteroide->setActive(false);
 	}
 
 	void generaAsteroide() {
@@ -85,12 +84,14 @@ public:
 			//std::cout << "--" << colu << ", " << fil << " TIPO B --\n";
 			asteroid->addComponent<Follow>(player_);
 			asteroid->addComponent<FramedImage>(&sdlutils().images().at("asteroid_gold"), 5, 6, 2, 0);
+			asteroid->addComponent<AsteroidType>('b');
 		}
 
 		else {
 			//Debug Log
 			//std::cout << "--" << colu << ", " << fil << " TIPO B --\n";
 			asteroid->addComponent<FramedImage>(&sdlutils().images().at("asteroid"), 5, 6, 2, 0);
+			asteroid->addComponent<AsteroidType>('a');
 		}
 
 		asteroid->setGroup<Asteroid_grp>(true);
@@ -116,14 +117,17 @@ public:
 			//Debug Log
 			asteroid->addComponent<Follow>(player_);
 			asteroid->addComponent<FramedImage>(&sdlutils().images().at("asteroid_gold"), 5, 6, 2, 0);
+			asteroid->addComponent<AsteroidType>('b');
 		}
 
 		else {
 			//Debug Log
 			asteroid->addComponent<FramedImage>(&sdlutils().images().at("asteroid"), 5, 6, 2, 0);
+			asteroid->addComponent<AsteroidType>('a');
 		}
 		asteroid->setGroup<Asteroid_grp>(true);
 	}
+
 private:
 	Transform* collisionTr_;
 	Manager* mngr_;
