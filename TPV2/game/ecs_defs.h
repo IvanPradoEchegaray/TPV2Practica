@@ -54,3 +54,19 @@ struct Asteroid_grp;
 // handlers
 struct Hdlr_1;
 #define _HDLRS_LIST_ Hdlr_1
+
+// systems
+class GameCtrlSystem;
+class BulletsSystem;
+class AsteroidsSystem;
+class CollisionSystem;
+class FighterSystem;
+class RenderSystem;
+
+#define _SYS_LIST_ \
+GameCtrlSystem, \
+BulletsSystem, \
+AsteroidsSystem, \
+CollisionSystem, \
+FighterSystem, \
+RenderSystem
