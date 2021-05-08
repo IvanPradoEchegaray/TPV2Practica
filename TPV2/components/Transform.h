@@ -56,7 +56,7 @@ public:
 		rotation_ = rot;
 	}
 
-	void update() override {
+	void update() {
 		pos_ = pos_ + vel_;
 	}
 

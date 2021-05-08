@@ -2,7 +2,7 @@
 #include "../ecs/System.h"
 #include "../components/State.h"
 
-class GameCtrlSystem : public System 
+class GameCtrlSystem : public System
 {
 public:
 	// - a este método se le va a llamar cuando muere el caza.
@@ -18,4 +18,4 @@ public:
 	// - si el juego está parado y el jugador pulsa SDLK_SPACE cambia el estado como
 	// en la práctica 1, etc.
 	void update() override;
-}
+};
