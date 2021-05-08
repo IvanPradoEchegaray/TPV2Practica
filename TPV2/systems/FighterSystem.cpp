@@ -3,7 +3,7 @@
 void FighterSystem::onCollisionWithAsteroid(Entity* a)
 {
 	//Reset de la posicion del player
-	Transform* player_tr = manager_->getComponent<Transform>(player);
+	Transform* player_tr = manager_->getComponent<Transform>(manager_->getHandler<MainHandler>());
 	//Posicion
 	player_tr->getPos().setX(sdlutils().width() / 2.0f - 20);
 	player_tr->getPos().setY(sdlutils().height() / 2.0f - 20);
@@ -14,7 +14,7 @@ void FighterSystem::onCollisionWithAsteroid(Entity* a)
 	player_vel.setX(0);
 	player_vel.setY(0);
 	//Aviso al gamectrlsystem
-	...
+	manager_->send(FighterAsteroidCollision(manager_->getHandler<MainHandler>(), a));
 }
 
 void FighterSystem::init()

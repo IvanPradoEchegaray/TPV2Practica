@@ -9,10 +9,18 @@
 //#include "../components/Gun.h"
 #include "../components/ShowAtOppositeSide.h"
 #include "../sdlutils/SDLUtils.h"
+#include "../sdlutils/Messages.h"
 #include "GameCtrlSystem.h"
 #include "BulletsSystem.h"
+
+
+class Message;
+
 class FighterSystem:public System
 {
+	struct CollisionWithAsteroidMsg : Message {
+
+	};
 public:
 	// - poner el caza en el centro con velocidad 0 y rotaci?n 0. No hace falta
 	// desactivar la entidad (no dibujarla si el juego est? parado en RenderSystem).

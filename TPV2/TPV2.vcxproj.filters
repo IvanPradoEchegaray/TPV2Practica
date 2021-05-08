@@ -275,5 +275,8 @@
     <ClInclude Include="systems\BulletsSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
+    <ClInclude Include="sdlutils\Messages.h">
+      <Filter>Header Files\sdlutils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

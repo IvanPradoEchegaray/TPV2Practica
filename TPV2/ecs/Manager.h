@@ -10,7 +10,7 @@
 #include "ecs.h"
 #include "Entity.h"
 #include "System.h"
-
+#include "../sdlutils/Messages.h"
 
 class Manager {
 public:

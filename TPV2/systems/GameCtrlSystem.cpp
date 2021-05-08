@@ -1,19 +1,14 @@
 #include "GameCtrlSystem.h"
 
 void GameCtrlSystem::onFighterDeath() {
-	manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->loseLife();
 	//Desactivar asteroides y balas
 	for (Entity* e : manager_->getEntities()) {
 		if (manager_->hasGroup<Asteroid_grp>(e) || manager_->hasGroup<Bullet_grp>(e))
 			manager_->setActive(e, false);
 	}
-	//Si no le quedan vidas al player
-	if (manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->isDead()) {
-		manager_->getComponent<State>(manager_->getHandler<GameManager>())->gameOver();
-		manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->resetLifes();
-	}
-	else
-		manager_->getComponent<State>(manager_->getHandler<GameManager>())->pause();
+	manager_->getComponent<State>(manager_->getHandler<GameManager>())->gameOver();
+	manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->resetLifes();
+	manager_->getComponent<State>(manager_->getHandler<GameManager>())->pause();
 }
 
 void GameCtrlSystem::onAsteroidsExtinction() {
@@ -58,4 +53,23 @@ void GameCtrlSystem::update()
 		manager_->getComponent<FighterCtrl>(manager_->getHandler<MainHandler>())->enableInput(false);
 	else
 		manager_->getComponent<FighterCtrl>(manager_->getHandler<MainHandler>())->enableInput(true);
+}
+
+void GameCtrlSystem::receive(const Message& msg)
+{
+	switch (msg.id_)
+	{
+	case Fighter_Asteroid_Collision:
+		const FighterAsteroidCollision& m = static_cast<const FighterAsteroidCollision&>(msg);
+		manager_->getComponent<Health>(m.player_)->loseLife();
+		if (manager_->getComponent<Health>(m.player_)->isDead())
+			onFighterDeath();
+		break;
+	case Bullet_Asteroid_Collision:
+		const BulletAsteroidCollision& ms = static_cast<const BulletAsteroidCollision&>(msg);
+		manager_->getSystem<AsteroidsSystem>()->onCollisionWithBullet(ms.asteroid_, ms.bullet_);
+		if (manager_->getComponent<AsteroidsManager>(manager_->getHandler<GameManager>())->getNumAsteroides() <= 0)
+			onAsteroidsExtinction();
+		break;
+	}
 }

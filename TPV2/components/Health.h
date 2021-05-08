@@ -12,7 +12,7 @@ public:
 	void init() override {
 		resetLifes();
 	}
-	void render()override {
+	void render() {
 		for (int i = 0; i < vidas_; i++) {
 			Vector2D pos = Vector2D(pos_.getX() + width_ * i, pos_.getY());
 			SDL_Rect dest = build_sdlrect(pos, width_, heigth_);

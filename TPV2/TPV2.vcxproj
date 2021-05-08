@@ -71,6 +71,7 @@
     <ClInclude Include="json\simplejson_demo.h" />
     <ClInclude Include="json\JSON.h" />
     <ClInclude Include="json\JSONValue.h" />
+    <ClInclude Include="sdlutils\Messages.h" />
     <ClInclude Include="sdlutils\sdlutils_demo.h" />
     <ClInclude Include="sdlutils\Font.h" />
     <ClInclude Include="sdlutils\InputHandler.h" />
