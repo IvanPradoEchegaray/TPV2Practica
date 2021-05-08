@@ -55,6 +55,9 @@
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{70b1cb47-27f5-44df-922f-26d030da4910}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\systems">
+      <UniqueIdentifier>{159aa8a7-cdfd-4aa2-9082-d7d9f3760603}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -231,7 +234,7 @@
       <Filter>Header Files\ecs</Filter>
     </ClInclude>
     <ClInclude Include="FighterSystem.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

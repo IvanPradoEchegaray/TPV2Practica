@@ -4,7 +4,6 @@
 #include "./ecs/Manager.h"
 #include "./ecs/Component.h"
 #include "./components/Transform.h"
-#include "./sdlutils/SDLUtils.h"
 class FighterSystem:public System
 {
 public:
