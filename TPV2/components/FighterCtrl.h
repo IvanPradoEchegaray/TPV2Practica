@@ -30,7 +30,7 @@ public:
 		ableInput_ = false;
 	}
 
-	void update() override {
+	void update() {
 		if (ih().keyDownEvent() && ableInput_) {
 			auto &vel = tr_->getVel();
 			if (ih().isKeyDown(SDLK_UP)) {

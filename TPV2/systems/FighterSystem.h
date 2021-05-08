@@ -4,6 +4,13 @@
 #include "../ecs/Manager.h"
 #include "../ecs/Component.h"
 #include "../components/Transform.h"
+#include "../components/DeAcceleration.h"
+#include "../components/FighterCtrl.h"
+//#include "../components/Gun.h"
+#include "../components/ShowAtOppositeSide.h"
+#include "../sdlutils/SDLUtils.h"
+#include "GameCtrlSystem.h"
+#include "BulletsSystem.h"
 class FighterSystem:public System
 {
 public:
@@ -19,5 +26,8 @@ public:
 	// - actualizar la velocidad del caza y moverlo como en la pr?ctica 1.
 	void update() override;
 
+	void shootBullet();
+protected:
+	Uint32 startTime_;
 };
 

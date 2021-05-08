@@ -23,6 +23,8 @@ public:
 	virtual void receive(const Message&) {
 	}
 
+	friend Entity;
+
 protected:
 	Manager *manager_;
 };

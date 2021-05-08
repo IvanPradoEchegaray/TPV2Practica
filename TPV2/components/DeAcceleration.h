@@ -16,7 +16,7 @@ public:
 		assert(tr_ != nullptr);
 	}
 
-	void update() override {
+	void update() {
 		auto& vel = tr_->getVel();
 		vel = vel * 0.995f;
 	}

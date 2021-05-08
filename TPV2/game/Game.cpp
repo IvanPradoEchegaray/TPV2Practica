@@ -38,21 +38,20 @@ void Game::init() {
 
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroids.resources.json");
-	collisionsSys_ = mngr_->addSystem<CollisionSystem>();
-	//Player Entidad
-	auto *player = mngr_->addEntity();
-	player->addComponent<Transform>(
-			Vector2D(sdlutils().width() / 2.0f - 20, sdlutils().height() / 2.0f - 20),
-			Vector2D(0.0f,0.0f), 20.0f, 20.0f, 0.0f);
-	player->addComponent<Image>(&sdlutils().images().at("fighter"));
-	player->addComponent<DeAcceleration>();
-	player->addComponent<Health>(3,
-		Vector2D(sdlutils().width() * 0.02f, sdlutils().height() * 0.02f), 40.0f, 40.0f, 
-		&sdlutils().images().at("heart"));
-	player->addComponent<FighterCtrl>();
-	player->addComponent<Gun>();
-	player->addComponent<ShowAtOppositeSide>();
-	////gameManager Entidad
+	////Player Entidad
+	//auto *player = mngr_->addEntity();
+	//player->addComponent<Transform>(
+	//		Vector2D(sdlutils().width() / 2.0f - 20, sdlutils().height() / 2.0f - 20),
+	//		Vector2D(0.0f,0.0f), 20.0f, 20.0f, 0.0f);
+	//player->addComponent<Image>(&sdlutils().images().at("fighter"));
+	//player->addComponent<DeAcceleration>();
+	//player->addComponent<Health>(3,
+	//	Vector2D(sdlutils().width() * 0.02f, sdlutils().height() * 0.02f), 40.0f, 40.0f, 
+	//	&sdlutils().images().at("heart"));
+	//player->addComponent<FighterCtrl>();
+	//player->addComponent<Gun>();
+	//player->addComponent<ShowAtOppositeSide>();
+	//gameManager Entidad
 	//auto* gameManager = mngr_->addEntity();
 	//gameManager->addComponent<State>();
 	//gameManager->addComponent<GameCtrl>(player);

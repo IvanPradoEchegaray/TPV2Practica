@@ -102,9 +102,6 @@
     <ClCompile Include="game\Game.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
-    <ClCompile Include="systems\BulletSystem.cpp">
-      <Filter>Source Files\systems</Filter>
-    </ClCompile>
     <ClCompile Include="systems\FighterGunSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
@@ -121,6 +118,9 @@
       <Filter>Source Files\systems</Filter>
     </ClCompile>
     <ClCompile Include="systems\CollisionsSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\BulletsSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -254,9 +254,6 @@
     <ClInclude Include="ecs\System.h">
       <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="systems\BulletSystem.h">
-      <Filter>Header Files\systems</Filter>
-    </ClInclude>
     <ClInclude Include="systems\FighterGunSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
@@ -273,6 +270,9 @@
       <Filter>Header Files\systems</Filter>
     </ClInclude>
     <ClInclude Include="systems\CollisionsSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\BulletsSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
   </ItemGroup>

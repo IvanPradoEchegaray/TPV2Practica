@@ -17,7 +17,7 @@ public:
 		assert(tr_ != nullptr);
 	}
 
-	void update() override {
+	void update() {
 		auto& pos = tr_->getPos();
 		auto w = tr_->getW();
 		auto h = tr_->getH();
