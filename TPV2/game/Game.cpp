@@ -28,6 +28,7 @@
 
 Game::Game() {
 	mngr_.reset(new Manager());
+	collisionsSys_ = nullptr;
 }
 
 Game::~Game() {
@@ -37,6 +38,7 @@ void Game::init() {
 
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroids.resources.json");
+	collisionsSys_ = mngr_->addSystem<CollisionSystem>();
 	//Player Entidad
 	auto *player = mngr_->addEntity();
 	player->addComponent<Transform>(
@@ -50,12 +52,12 @@ void Game::init() {
 	player->addComponent<FighterCtrl>();
 	player->addComponent<Gun>();
 	player->addComponent<ShowAtOppositeSide>();
-	//gameManager Entidad
-	auto* gameManager = mngr_->addEntity();
-	gameManager->addComponent<State>();
-	gameManager->addComponent<GameCtrl>(player);
-	gameManager->addComponent<AsteroidsManager>(player);
-	gameManager->addComponent<CollisionManager>(player);
+	////gameManager Entidad
+	//auto* gameManager = mngr_->addEntity();
+	//gameManager->addComponent<State>();
+	//gameManager->addComponent<GameCtrl>(player);
+	//gameManager->addComponent<AsteroidsManager>(player);
+	//gameManager->addComponent<CollisionManager>(player);
 
 }
 

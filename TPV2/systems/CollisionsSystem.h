@@ -1,5 +1,9 @@
 #pragma once
+#include "GameCtrlSystem.h"
 #include "../ecs/System.h"
+#include "../ecs/Entity.h"
+#include "../components/Transform.h"
+#include "../components/CollisionManager.h"
 
 class CollisionSystem : public System {
 public:

@@ -17,5 +17,6 @@ public:
 	void start();
 private:
 	std::unique_ptr<Manager> mngr_;
+	System* collisionsSys_;
 };
 

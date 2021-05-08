@@ -9,6 +9,7 @@ using namespace std;
 
 class AsteroidsSystem : public System {
 public:
+	void init();
 	// - añade n asteroides al juego como en la práctica 1.
 	void addAsteroids(int n);
 	// - desactivar el asteroide “a” y crear 2 asteroides como en la práctica 1.
