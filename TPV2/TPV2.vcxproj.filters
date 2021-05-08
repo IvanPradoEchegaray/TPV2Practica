@@ -114,6 +114,15 @@
     <ClCompile Include="systems\RenderSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
+    <ClCompile Include="systems\GameCtrlSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\AsteroidsSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\CollisionsSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="json\JSON.h">
@@ -255,6 +264,15 @@
       <Filter>Header Files\systems</Filter>
     </ClInclude>
     <ClInclude Include="systems\RenderSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\GameCtrlSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\AsteroidsSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\CollisionsSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
   </ItemGroup>

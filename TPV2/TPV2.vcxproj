@@ -30,9 +30,12 @@
     <ClCompile Include="sdlutils\SDLUtils.cpp" />
     <ClCompile Include="sdlutils\SoundEffect.cpp" />
     <ClCompile Include="sdlutils\Texture.cpp" />
+    <ClCompile Include="systems\AsteroidsSystem.cpp" />
     <ClCompile Include="systems\BulletSystem.cpp" />
+    <ClCompile Include="systems\CollisionsSystem.cpp" />
     <ClCompile Include="systems\FighterGunSystem.cpp" />
     <ClCompile Include="systems\FighterSystem.cpp" />
+    <ClCompile Include="systems\GameCtrlSystem.cpp" />
     <ClCompile Include="systems\RenderSystem.cpp" />
     <ClCompile Include="utils\Collisions.cpp" />
     <ClCompile Include="utils\Vector2D.cpp" />
@@ -78,9 +81,12 @@
     <ClInclude Include="sdlutils\SoundEffect.h" />
     <ClInclude Include="sdlutils\Texture.h" />
     <ClInclude Include="sdlutils\VirtualTimer.h" />
+    <ClInclude Include="systems\AsteroidsSystem.h" />
     <ClInclude Include="systems\BulletSystem.h" />
+    <ClInclude Include="systems\CollisionsSystem.h" />
     <ClInclude Include="systems\FighterGunSystem.h" />
     <ClInclude Include="systems\FighterSystem.h" />
+    <ClInclude Include="systems\GameCtrlSystem.h" />
     <ClInclude Include="systems\RenderSystem.h" />
     <ClInclude Include="utils\Collisions.h" />
     <ClInclude Include="utils\Singleton.h" />
