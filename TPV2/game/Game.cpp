@@ -41,7 +41,7 @@ void Game::init() {
 	auto *player = mngr_->addEntity();
 	player->addComponent<Transform>(
 			Vector2D(sdlutils().width() / 2.0f - 20, sdlutils().height() / 2.0f - 20),
-			Vector2D(0.0f,0.0f), 40.0f, 40.0f, 0.0f);
+			Vector2D(0.0f,0.0f), 20.0f, 20.0f, 0.0f);
 	player->addComponent<Image>(&sdlutils().images().at("fighter"));
 	player->addComponent<DeAcceleration>();
 	player->addComponent<Health>(3,

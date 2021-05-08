@@ -224,5 +224,8 @@
     <ClInclude Include="components\CollisionManager.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
+    <ClInclude Include="ecs\System.h">
+      <Filter>Header Files\ecs</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
