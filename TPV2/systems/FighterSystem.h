@@ -1,9 +1,9 @@
 #pragma once
-#include "./ecs/System.h"
-#include"./ecs/Entity.h"
-#include "./ecs/Manager.h"
-#include "./ecs/Component.h"
-#include "./components/Transform.h"
+#include "../ecs/System.h"
+#include"../ecs/Entity.h"
+#include "../ecs/Manager.h"
+#include "../ecs/Component.h"
+#include "../components/Transform.h"
 class FighterSystem:public System
 {
 public:

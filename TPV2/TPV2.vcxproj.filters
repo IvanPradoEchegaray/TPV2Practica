@@ -58,6 +58,9 @@
     <Filter Include="Header Files\systems">
       <UniqueIdentifier>{159aa8a7-cdfd-4aa2-9082-d7d9f3760603}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\systems">
+      <UniqueIdentifier>{096b7aab-6b91-4201-9aeb-89f3c4aa569d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -99,8 +102,17 @@
     <ClCompile Include="game\Game.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
-    <ClCompile Include="FighterSystem.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="systems\BulletSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\FighterGunSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\FighterSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\RenderSystem.cpp">
+      <Filter>Source Files\systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,7 +245,16 @@
     <ClInclude Include="ecs\System.h">
       <Filter>Header Files\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="FighterSystem.h">
+    <ClInclude Include="systems\BulletSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\FighterGunSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\FighterSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\RenderSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
   </ItemGroup>

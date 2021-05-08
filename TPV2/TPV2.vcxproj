@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="ecs\Entity.cpp" />
     <ClCompile Include="ecs\Manager.cpp" />
-    <ClCompile Include="FighterSystem.cpp" />
     <ClCompile Include="game\Game.cpp" />
     <ClCompile Include="json\somplejson_demo.cpp" />
     <ClCompile Include="json\JSON.cpp" />
@@ -31,6 +30,10 @@
     <ClCompile Include="sdlutils\SDLUtils.cpp" />
     <ClCompile Include="sdlutils\SoundEffect.cpp" />
     <ClCompile Include="sdlutils\Texture.cpp" />
+    <ClCompile Include="systems\BulletSystem.cpp" />
+    <ClCompile Include="systems\FighterGunSystem.cpp" />
+    <ClCompile Include="systems\FighterSystem.cpp" />
+    <ClCompile Include="systems\RenderSystem.cpp" />
     <ClCompile Include="utils\Collisions.cpp" />
     <ClCompile Include="utils\Vector2D.cpp" />
   </ItemGroup>
@@ -60,7 +63,6 @@
     <ClInclude Include="ecs\Manager.h" />
     <ClInclude Include="ecs\mpl.h" />
     <ClInclude Include="ecs\System.h" />
-    <ClInclude Include="FighterSystem.h" />
     <ClInclude Include="game\ecs_defs.h" />
     <ClInclude Include="game\Game.h" />
     <ClInclude Include="json\simplejson_demo.h" />
@@ -76,6 +78,10 @@
     <ClInclude Include="sdlutils\SoundEffect.h" />
     <ClInclude Include="sdlutils\Texture.h" />
     <ClInclude Include="sdlutils\VirtualTimer.h" />
+    <ClInclude Include="systems\BulletSystem.h" />
+    <ClInclude Include="systems\FighterGunSystem.h" />
+    <ClInclude Include="systems\FighterSystem.h" />
+    <ClInclude Include="systems\RenderSystem.h" />
     <ClInclude Include="utils\Collisions.h" />
     <ClInclude Include="utils\Singleton.h" />
     <ClInclude Include="utils\Vector2D.h" />

@@ -58,6 +58,7 @@ struct Hdlr_1;
 // systems
 class GameCtrlSystem;
 class BulletsSystem;
+class FighterGunSystem;
 class AsteroidsSystem;
 class CollisionSystem;
 class FighterSystem;
@@ -66,6 +67,7 @@ class RenderSystem;
 #define _SYS_LIST_ \
 GameCtrlSystem, \
 BulletsSystem, \
+FighterGunSystem, \
 AsteroidsSystem, \
 CollisionSystem, \
 FighterSystem, \
