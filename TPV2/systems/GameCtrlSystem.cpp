@@ -68,6 +68,7 @@ void GameCtrlSystem::receive(const Message& msg)
 	case Bullet_Asteroid_Collision:
 		const BulletAsteroidCollision& ms = static_cast<const BulletAsteroidCollision&>(msg);
 		manager_->getSystem<AsteroidsSystem>()->onCollisionWithBullet(ms.asteroid_, ms.bullet_);
+		manager_->getSystem<BulletsSystem>()->onCollisionWithAsteroid(ms.bullet_,ms.asteroid_);
 		if (manager_->getComponent<AsteroidsManager>(manager_->getHandler<GameManager>())->getNumAsteroides() <= 0)
 			onAsteroidsExtinction();
 		break;

@@ -7,6 +7,7 @@
 #include "../components/FighterCtrl.h"
 #include "../sdlutils/Messages.h"
 #include "AsteroidsSystem.h"
+#include "BulletsSystem.h"
 
 
 class GameCtrlSystem : public System

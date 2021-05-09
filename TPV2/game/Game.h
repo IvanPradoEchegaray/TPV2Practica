@@ -17,6 +17,12 @@ public:
 	void start();
 private:
 	std::unique_ptr<Manager> mngr_;
-	System* collisionsSys_;
+	System* gameCtrlSystem_;
+	System* fighterSystem_;
+	System* fighterGunSystem_;
+	System* bulletsSystem_;
+	System* asteroidsSystem_;
+	System* collisionSystem_;
+	System* renderSystem_;
 };
 

@@ -28,7 +28,6 @@
 
 Game::Game() {
 	mngr_.reset(new Manager());
-	collisionsSys_ = nullptr;
 }
 
 Game::~Game() {
@@ -38,6 +37,34 @@ void Game::init() {
 
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroids.resources.json");
+	//Systems
+	gameCtrlSystem_ = mngr_.get()->addSystem<GameCtrlSystem>();
+	gameCtrlSystem_->setMngr(mngr_.get());
+	gameCtrlSystem_->init(); 
+
+	fighterSystem_ = mngr_.get()->addSystem<FighterSystem>();
+	fighterSystem_->setMngr(mngr_.get());
+	fighterSystem_->init();
+
+	fighterGunSystem_ = mngr_.get()->addSystem<FighterGunSystem>();
+	fighterGunSystem_->setMngr(mngr_.get());
+	fighterGunSystem_->init();
+
+	asteroidsSystem_ = mngr_.get()->addSystem<AsteroidsSystem>();
+	asteroidsSystem_->setMngr(mngr_.get());
+	asteroidsSystem_->init();
+
+	collisionSystem_ = mngr_.get()->addSystem<CollisionSystem>();
+	collisionSystem_->setMngr(mngr_.get());
+	collisionSystem_->init();
+
+	bulletsSystem_ = mngr_.get()->addSystem<BulletsSystem>();
+	bulletsSystem_->setMngr(mngr_.get());
+	bulletsSystem_->init();
+
+	renderSystem_ = mngr_.get()->addSystem<RenderSystem>();
+	renderSystem_->setMngr(mngr_.get());
+	renderSystem_->init();
 	////Player Entidad
 	//auto *player = mngr_->addEntity();
 	//player->addComponent<Transform>(
@@ -78,11 +105,16 @@ void Game::start() {
 			continue;
 		}
 
-		mngr_->update();
+		gameCtrlSystem_->update();
+		fighterSystem_->update();
+		fighterGunSystem_->update();
+		bulletsSystem_->update();
+		asteroidsSystem_->update();
+		collisionSystem_->update();
+		renderSystem_->update();
 		mngr_->refresh();
 
 		sdlutils().clearRenderer();
-		mngr_->render();
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;

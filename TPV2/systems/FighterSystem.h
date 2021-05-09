@@ -18,10 +18,8 @@ class Message;
 
 class FighterSystem:public System
 {
-	struct CollisionWithAsteroidMsg : Message {
-
-	};
 public:
+	FighterSystem() {}
 	// - poner el caza en el centro con velocidad 0 y rotaci?n 0. No hace falta
 	// desactivar la entidad (no dibujarla si el juego est? parado en RenderSystem).
 	// - avisar al GameCtrlSystem que se ha muerto el caza (se puede tambi?n avisar
