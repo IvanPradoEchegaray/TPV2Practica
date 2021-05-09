@@ -79,7 +79,7 @@ class JSONValue
 		std::string StringifyImpl(size_t const indentDepth) const;
 		static std::string Indent(size_t depth);
 
-		JSONType type;
+		JSONType getType;
 
 		union
 		{

@@ -36,7 +36,7 @@ public:
 
 	// update the state with a new event
 	inline void update(const SDL_Event &event) {
-		switch (event.type) {
+		switch (event.getType) {
 		case SDL_KEYDOWN:
 			onKeyDown(event);
 			break;

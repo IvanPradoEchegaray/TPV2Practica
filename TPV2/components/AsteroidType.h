@@ -4,9 +4,10 @@
 
 class AsteroidType : public Component {
 public:
-	AsteroidType(char type) : type_(type) {}
+	AsteroidType(char t) : type_(t) {}
 	virtual ~AsteroidType() {}
-	char type() { return type_; };
+	char getType() { return type_; };
+	void setType(char t) { type_ = t; };
 private:
 	char type_;
 };

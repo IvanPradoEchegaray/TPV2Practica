@@ -8,13 +8,10 @@
 
 class Follow : public Component {
 public:
-	Follow(Transform* tr, Transform* cazaTr, Entity* caza) :
-		tr_(tr), cazaTr_(cazaTr), caza_(caza){
-	}
+	Follow(Transform* tr, Transform* cazaTr) :
+		tr_(tr), cazaTr_(cazaTr) {}
 
-	virtual ~Follow() {
-	}
-
+	virtual ~Follow() {}
 
 	void update() {
 		auto& p = tr_->getPos();
@@ -27,6 +24,5 @@ public:
 private:
 	Transform* tr_;
 	Transform* cazaTr_;
-	Entity* caza_;
 };
 

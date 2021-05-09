@@ -8,7 +8,7 @@
 
 class FramedImage : public Component {
 public:
-	FramedImage(Texture* text, Transform* tr, int filas, int columnas, float tiempoAnim, int empty) : text_(text), tr_(tr), time_(0), size_(columnas, filas)
+	FramedImage(Transform* tr, Texture* text, int filas, int columnas, float tiempoAnim, int empty) : text_(text), tr_(tr), time_(0), size_(columnas, filas)
 	{
 		frame = Vector2D(0, 0);
 		auto w = text_->width() / columnas,
@@ -53,7 +53,7 @@ private:
 	Uint32 time_;
 	Vector2D frame;		// coordenadas del frame actual
 	Vector2D frameSize_;
-	Vector2D size_;		// tamaño del spritesheet en filas y columnas
+	Vector2D size_;		// tamaï¿½o del spritesheet en filas y columnas
 	SDL_Rect src;
 	float tAnim_;
 	int emptyFrames_;

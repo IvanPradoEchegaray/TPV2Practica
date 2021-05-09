@@ -6,13 +6,12 @@
 
 class Generations: public Component {
 public:
-	Generations() : tr_(nullptr), gen_(sdlutils().rand().nextInt(1, 4)) {}
-	Generations(int i) : tr_(nullptr), gen_(i) {}
+	Generations(Transform* tr) : tr_(tr), gen_(sdlutils().rand().nextInt(1, 4)) {}
+	Generations(Transform* tr, int i) : tr_(tr), gen_(i) {}
 
 	virtual ~Generations() {}
 
-	void init() override {
-		tr_ = entity_->getComponent<Transform>();
+	void init() {
 	    assert(tr_ != nullptr);
 
 		tr_->setH(14.0f + 7.0f * gen_);

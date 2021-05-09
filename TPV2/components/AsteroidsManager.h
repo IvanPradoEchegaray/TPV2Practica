@@ -17,12 +17,12 @@ public:
 
 	virtual ~AsteroidsManager() {}
 
-	void init() override {
+	void init() {
 		mngr_ = entity_->getMngr();
 		startTime_ = sdlutils().currRealTime();
 	}
 
-	void update() override {
+	void update() {
 		//Debug Log
 		//std::cout << nAsteroides_ << "\n";
 

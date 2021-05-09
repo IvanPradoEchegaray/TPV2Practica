@@ -24,4 +24,5 @@ public:
 	void update() override;
 private:
 	size_t numOfAsteroids_;
+	Uint32 startTime_;
 };

@@ -309,7 +309,7 @@ JSONValue *JSONValue::Parse(const char **data)
  */
 JSONValue::JSONValue(/*NULL*/)
 {
-	type = JSONType_Null;
+	getType = JSONType_Null;
 }
 
 /**
@@ -321,7 +321,7 @@ JSONValue::JSONValue(/*NULL*/)
  */
 JSONValue::JSONValue(const char *m_char_value)
 {
-	type = JSONType_String;
+	getType = JSONType_String;
 	string_value = new std::string(std::string(m_char_value));
 }
 
@@ -334,7 +334,7 @@ JSONValue::JSONValue(const char *m_char_value)
  */
 JSONValue::JSONValue(const std::string &m_string_value)
 {
-	type = JSONType_String;
+	getType = JSONType_String;
 	string_value = new std::string(m_string_value);
 }
 
@@ -347,7 +347,7 @@ JSONValue::JSONValue(const std::string &m_string_value)
  */
 JSONValue::JSONValue(bool m_bool_value)
 {
-	type = JSONType_Bool;
+	getType = JSONType_Bool;
 	bool_value = m_bool_value;
 }
 
@@ -360,7 +360,7 @@ JSONValue::JSONValue(bool m_bool_value)
  */
 JSONValue::JSONValue(double m_number_value)
 {
-	type = JSONType_Number;
+	getType = JSONType_Number;
 	number_value = m_number_value;
 }
 
@@ -373,7 +373,7 @@ JSONValue::JSONValue(double m_number_value)
  */
 JSONValue::JSONValue(int m_integer_value)
 {
-	type = JSONType_Number;
+	getType = JSONType_Number;
 	number_value = static_cast<double>(m_integer_value);
 }
 
@@ -386,7 +386,7 @@ JSONValue::JSONValue(int m_integer_value)
  */
 JSONValue::JSONValue(const JSONArray &m_array_value)
 {
-	type = JSONType_Array;
+	getType = JSONType_Array;
 	array_value = new JSONArray(m_array_value);
 }
 
@@ -399,7 +399,7 @@ JSONValue::JSONValue(const JSONArray &m_array_value)
  */
 JSONValue::JSONValue(const JSONObject &m_object_value)
 {
-	type = JSONType_Object;
+	getType = JSONType_Object;
 	object_value = new JSONObject(m_object_value);
 }
 
@@ -412,9 +412,9 @@ JSONValue::JSONValue(const JSONObject &m_object_value)
  */
 JSONValue::JSONValue(const JSONValue &m_source)
 {
-	type = m_source.type;
+	getType = m_source.getType;
 
-	switch (type)
+	switch (getType)
 	{
 		case JSONType_String:
 			string_value = new std::string(*m_source.string_value);
@@ -465,14 +465,14 @@ JSONValue::JSONValue(const JSONValue &m_source)
  */
 JSONValue::~JSONValue()
 {
-	if (type == JSONType_Array)
+	if (getType == JSONType_Array)
 	{
 		JSONArray::iterator iter;
 		for (iter = array_value->begin(); iter != array_value->end(); iter++)
 			delete *iter;
 		delete array_value;
 	}
-	else if (type == JSONType_Object)
+	else if (getType == JSONType_Object)
 	{
 		JSONObject::iterator iter;
 		for (iter = object_value->begin(); iter != object_value->end(); iter++)
@@ -481,7 +481,7 @@ JSONValue::~JSONValue()
 		}
 		delete object_value;
 	}
-	else if (type == JSONType_String)
+	else if (getType == JSONType_String)
 	{
 		delete string_value;
 	}
@@ -496,7 +496,7 @@ JSONValue::~JSONValue()
  */
 bool JSONValue::IsNull() const
 {
-	return type == JSONType_Null;
+	return getType == JSONType_Null;
 }
 
 /**
@@ -508,7 +508,7 @@ bool JSONValue::IsNull() const
  */
 bool JSONValue::IsString() const
 {
-	return type == JSONType_String;
+	return getType == JSONType_String;
 }
 
 /**
@@ -520,7 +520,7 @@ bool JSONValue::IsString() const
  */
 bool JSONValue::IsBool() const
 {
-	return type == JSONType_Bool;
+	return getType == JSONType_Bool;
 }
 
 /**
@@ -532,7 +532,7 @@ bool JSONValue::IsBool() const
  */
 bool JSONValue::IsNumber() const
 {
-	return type == JSONType_Number;
+	return getType == JSONType_Number;
 }
 
 /**
@@ -544,7 +544,7 @@ bool JSONValue::IsNumber() const
  */
 bool JSONValue::IsArray() const
 {
-	return type == JSONType_Array;
+	return getType == JSONType_Array;
 }
 
 /**
@@ -556,7 +556,7 @@ bool JSONValue::IsArray() const
  */
 bool JSONValue::IsObject() const
 {
-	return type == JSONType_Object;
+	return getType == JSONType_Object;
 }
 
 /**
@@ -635,7 +635,7 @@ const JSONObject &JSONValue::AsObject() const
  */
 std::size_t JSONValue::CountChildren() const
 {
-	switch (type)
+	switch (getType)
 	{
 		case JSONType_Array:
 			return array_value->size();
@@ -656,7 +656,7 @@ std::size_t JSONValue::CountChildren() const
  */
 bool JSONValue::HasChild(std::size_t index) const
 {
-	if (type == JSONType_Array)
+	if (getType == JSONType_Array)
 	{
 		return index < array_value->size();
 	}
@@ -697,7 +697,7 @@ JSONValue *JSONValue::Child(std::size_t index)
  */
 bool JSONValue::HasChild(const char* name) const
 {
-	if (type == JSONType_Object)
+	if (getType == JSONType_Object)
 	{
 		return object_value->find(name) != object_value->end();
 	}
@@ -741,7 +741,7 @@ std::vector<std::string> JSONValue::ObjectKeys() const
 {
 	std::vector<std::string> keys;
 
-	if (type == JSONType_Object)
+	if (getType == JSONType_Object)
 	{
 		JSONObject::const_iterator iter = object_value->begin();
 		while (iter != object_value->end())
@@ -787,7 +787,7 @@ std::string JSONValue::StringifyImpl(size_t const indentDepth) const
 	std::string const indentStr = Indent(indentDepth);
 	std::string const indentStr1 = Indent(indentDepth1);
 
-	switch (type)
+	switch (getType)
 	{
 		case JSONType_Null:
 			ret_string = "nul";
