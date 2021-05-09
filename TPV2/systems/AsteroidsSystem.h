@@ -3,6 +3,7 @@
 #include "../ecs/System.h"
 #include "../ecs/Entity.h"
 #include "../components/Transform.h"
+#include "../components/Follow.h"
 #include "../components/AsteroidsManager.h"
 #include "../components/AsteroidType.h"
 
@@ -22,6 +23,9 @@ public:
 	// - si el juego estÅEparado no hacer nada.
 	// - mover los asteroides como en la pr·ctica 1.
 	void update() override;
+
+	const int& getNumAsteroids();
+
 private:
 	size_t numOfAsteroids_;
 	Uint32 startTime_;

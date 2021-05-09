@@ -4,7 +4,6 @@
 #include "Follow.h"
 #include "Generations.h"
 #include "Transform.h"
-#include "AsteroidType"
 
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
@@ -13,7 +12,7 @@
 
 class AsteroidsManager : public Component {
 public:
-	AsteroidsManager(Entity* player) : player_(player) {}
+	/*AsteroidsManager(Entity* player) : player_(player) {}
 
 	virtual ~AsteroidsManager() {}
 
@@ -133,5 +132,5 @@ private:
 	Manager* mngr_;
 	Entity* player_;
 	int nAsteroides_;
-	Uint32 startTime_;
+	Uint32 startTime_;*/
 };

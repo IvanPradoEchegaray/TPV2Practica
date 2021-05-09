@@ -2,18 +2,21 @@
 
 void GameCtrlSystem::onFighterDeath() {
 	//Desactivar asteroides y balas
-	for (Entity* e : manager_->getEntities()) {
+	for (Entity* e : manager_->getEnteties()) {
 		if (manager_->hasGroup<Asteroid_grp>(e) || manager_->hasGroup<Bullet_grp>(e))
 			manager_->setActive(e, false);
 	}
-	manager_->getComponent<State>(manager_->getHandler<GameManager>())->gameOver();
-	manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->resetLifes();
+	manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->loseLife();
+	if (manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->isDead()) {
+		manager_->getComponent<State>(manager_->getHandler<GameManager>())->gameOver();
+		manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->resetLifes();
+	}
 	manager_->getComponent<State>(manager_->getHandler<GameManager>())->pause();
 }
 
 void GameCtrlSystem::onAsteroidsExtinction() {
 	//Desactivar asteroides y balas
-	for (Entity* e : manager_->getEntities()) {
+	for (Entity* e : manager_->getEnteties()) {
 		if (manager_->hasGroup<Bullet_grp>(e))
 			manager_->setActive(e, false);
 	}
@@ -31,9 +34,9 @@ void GameCtrlSystem::init()
 {
 	auto* gameManager = manager_->addEntity();
 	manager_->addComponent<State>(gameManager);
-	manager_->addComponent<GameCtrl>(gameManager, manager_->getHandler<MainHandler>());
-	manager_->addComponent<AsteroidsManager>(gameManager, manager_->getHandler<MainHandler>());
-	manager_->addComponent<CollisionManager>(gameManager, manager_->getHandler<MainHandler>());
+	//manager_->addComponent<GameCtrl>(gameManager, manager_->getHandler<MainHandler>());
+	//manager_->addComponent<AsteroidsManager>(gameManager, manager_->getHandler<MainHandler>());
+	//manager_->addComponent<CollisionManager>(gameManager, manager_->getHandler<MainHandler>());
 	manager_->setHandler<GameManager>(gameManager);
 }
 
@@ -43,9 +46,7 @@ void GameCtrlSystem::update()
 		if (ih().isKeyDown(SDLK_SPACE) && manager_->getComponent<State>(manager_->getHandler<GameManager>())->getState() != RUNNING) {
 			manager_->getComponent<State>(manager_->getHandler<GameManager>())->run();
 			//Crea 10 asteroides
-			for (int i = 0; i < 10; i++)
-				manager_->getComponent<AsteroidsManager>(manager_->getHandler<GameManager>())->generaAsteroide();
-
+			manager_->getSystem<AsteroidsSystem>()->addAsteroids(10);
 		}
 	}
 	//Desactvar input en start, pausa y gameover
@@ -55,7 +56,7 @@ void GameCtrlSystem::update()
 		manager_->getComponent<FighterCtrl>(manager_->getHandler<MainHandler>())->enableInput(true);
 }
 
-void GameCtrlSystem::receive(const Message& msg)
+/*void GameCtrlSystem::receive(const Message& msg)
 {
 	switch (msg.id_)
 	{
@@ -69,8 +70,8 @@ void GameCtrlSystem::receive(const Message& msg)
 		const BulletAsteroidCollision& ms = static_cast<const BulletAsteroidCollision&>(msg);
 		manager_->getSystem<AsteroidsSystem>()->onCollisionWithBullet(ms.asteroid_, ms.bullet_);
 		manager_->getSystem<BulletsSystem>()->onCollisionWithAsteroid(ms.bullet_,ms.asteroid_);
-		if (manager_->getComponent<AsteroidsManager>(manager_->getHandler<GameManager>())->getNumAsteroides() <= 0)
+		if (manager_->getSystem<AsteroidsSystem>()->getNumAsteroids() <= 0)
 			onAsteroidsExtinction();
 		break;
 	}
-}
+}*/

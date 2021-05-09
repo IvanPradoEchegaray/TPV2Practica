@@ -15,20 +15,6 @@ void AsteroidsSystem::addAsteroids(int n)
 		manager_->addComponent<Transform>(asteroide);
 		manager_->addComponent<Generations>(asteroide, manager_->getComponent<Transform>(asteroide));
 			//TIPO B
-		if (sdlutils().rand().nextInt(0, 10) < 3) {
-			//Debug Log
-			//std::cout << "--" << colu << ", " << fil << " TIPO B --\n";
-			manager_->addComponent<Follow>(asteroide, manager_->getComponent<Transform>(asteroide), manager_->getComponent<Transform>(manager_->getHandler<MainHandler>()));
-			manager_->addComponent<FramedImage>(asteroide, manager_->getComponent<Transform>(asteroide), &sdlutils().images().at("asteroid_gold"), 5, 6, 2, 0);
-			manager_->addComponent<AsteroidType>(asteroide, 'b');
-		}
-			//TIPO A
-		else {
-			//Debug Log
-			//std::cout << "--" << colu << ", " << fil << " TIPO A --\n";
-			manager_->addComponent<FramedImage>(asteroide, &sdlutils().images().at("asteroid"), 5, 6, 2, 0);
-			manager_->addComponent<AsteroidType>(asteroide, 'a');
-		}
 		//---------------------------------------------------------------------------------------------------------
 
 		// Calculo la posicion inicial del asteroide de forma aleatoria
@@ -42,6 +28,20 @@ void AsteroidsSystem::addAsteroids(int n)
 			fil = sdlutils().rand().nextInt(0, 11);
 		}
 
+		if (sdlutils().rand().nextInt(0, 10) < 3) {
+			//Debug Log
+			std::cout << "--" << colu << ", " << fil << " TIPO B --\n";
+			manager_->addComponent<Follow>(asteroide, manager_->getComponent<Transform>(asteroide), manager_->getComponent<Transform>(manager_->getHandler<MainHandler>()));
+			manager_->addComponent<FramedImage>(asteroide, manager_->getComponent<Transform>(asteroide), &sdlutils().images().at("asteroid_gold"), 5, 6, 2, 0);
+			manager_->addComponent<AsteroidType>(asteroide, 'b');
+		}
+			//TIPO A
+		else {
+			//Debug Log
+			std::cout << "--" << colu << ", " << fil << " TIPO A --\n";
+			manager_->addComponent<FramedImage>(asteroide, manager_->getComponent<Transform>(asteroide), &sdlutils().images().at("asteroid"), 5, 6, 2, 0);
+			manager_->addComponent<AsteroidType>(asteroide, 'a');
+		}
 		Vector2D* p = new Vector2D(sdlutils().width() * colu / 10, sdlutils().height() * fil / 10);
 		Vector2D* c = new Vector2D((sdlutils().width() / 2) + sdlutils().rand().nextInt(-100, 101),
 			(sdlutils().height() / 2) + sdlutils().rand().nextInt(-100, 101));
@@ -79,18 +79,18 @@ void AsteroidsSystem::onCollisionWithBullet(Entity* a, Entity* b)
 			else {
 				//Debug Log
 				//std::cout << "--" << colu << ", " << fil << " TIPO A --\n";
-				manager_->addComponent<FramedImage>(asteroide, &sdlutils().images().at("asteroid"), 5, 6, 2, 0);
+				manager_->addComponent<FramedImage>(asteroide, manager_->getComponent<Transform>(asteroide), &sdlutils().images().at("asteroid"), 5, 6, 2, 0);
 				manager_->addComponent<AsteroidType>(asteroide, 'a');
 			}
 			//---------------------------------------------------------------------------------------------------------
 
-			auto& pos = manager_->getComponent<Transform>(asteroide)->getPos();
-			auto& vel = manager_->getComponent<Transform>(asteroide)->getVel();
-			float w = manager_->getComponent<Transform>(asteroide)->getW();
+			Vector2D pos = manager_->getComponent<Transform>(a)->getPos();
+			Vector2D vel = manager_->getComponent<Transform>(a)->getVel();
+			float w = manager_->getComponent<Transform>(a)->getW();
 
 			int r = sdlutils().rand().nextInt(0, 360);
-			pos.set(pos + vel.rotate(r) * 2 * w);
-			vel.set(vel.rotate(r) * 1.1f);
+			manager_->getComponent<Transform>(asteroide)->getPos().set(pos + vel.rotate(r) * 2 * w);
+			manager_->getComponent<Transform>(asteroide)->getVel().set(vel.rotate(r) * 1.1f);
 
 			manager_->setGroup<Asteroid_grp>(asteroide, true);
 		}
@@ -98,7 +98,7 @@ void AsteroidsSystem::onCollisionWithBullet(Entity* a, Entity* b)
 	//---------------------------------------------------------------------------------------------
 
 	manager_->setActive(a, false);
-	manager_->send(BulletAsteroidCollision(b, a));
+	//manager_->send(BulletAsteroidCollision(b, a));
 }
 
 void AsteroidsSystem::update() {
@@ -108,6 +108,17 @@ void AsteroidsSystem::update() {
 			startTime_ = sdlutils().currRealTime();
 			addAsteroids(1);
 		}
-		
 	}
+	for (Entity* e : manager_->getEnteties()) {
+		if (manager_->hasGroup<Asteroid_grp>(e)) {
+			if(manager_->getComponent<Follow>(e))
+			manager_->getComponent<Follow>(e)->update();
+			manager_->getComponent<Transform>(e)->update();
+		}
+	}
+}
+
+const int& AsteroidsSystem::getNumAsteroids()
+{
+	return numOfAsteroids_;
 }

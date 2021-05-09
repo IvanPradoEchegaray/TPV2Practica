@@ -19,8 +19,7 @@ public:
 	}
 
 	void render() {
-		Vector2D pos = Vector2D(tr_->getPos().getX() - (tr_->getW() / 2.0), tr_->getPos().getY() - (tr_->getH() / 2.0));
-		SDL_Rect dest = build_sdlrect(pos, tr_->getW(), tr_->getH());
+		SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getW(), tr_->getH());
 		tex_->render(dest, tr_->getRot());
 	}
 

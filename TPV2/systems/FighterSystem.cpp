@@ -14,7 +14,7 @@ void FighterSystem::onCollisionWithAsteroid(Entity* a)
 	player_vel.setX(0);
 	player_vel.setY(0);
 	//Aviso al gamectrlsystem
-	manager_->send(FighterAsteroidCollision(manager_->getHandler<MainHandler>(), a));
+	manager_->getSystem<GameCtrlSystem>()->onFighterDeath();
 }
 
 void FighterSystem::init()
@@ -23,7 +23,7 @@ void FighterSystem::init()
 	auto* player = manager_->addEntity();
 	manager_->addComponent<Transform>(player,
 		Vector2D(sdlutils().width() / 2.0f - 20, sdlutils().height() / 2.0f - 20),
-		Vector2D(0.0f, 0.0f), 20.0f, 20.0f, 0.0f);
+		Vector2D(0.0f, 0.0f), 40.0f, 40.0f, 0.0f);
 	manager_->addComponent<Image>(player,&sdlutils().images().at("fighter"), manager_->getComponent<Transform>(player));
 	manager_->addComponent<DeAcceleration>(player, manager_->getComponent<Transform>(player));
 	manager_->addComponent<Health>(player,3,
@@ -37,6 +37,7 @@ void FighterSystem::init()
 void FighterSystem::update()
 {
 	if (manager_->getSystem<GameCtrlSystem>()->getGameState() == RUNNING) {
+		manager_->getComponent<Transform>(manager_->getHandler<MainHandler>())->update();
 		manager_->getComponent<DeAcceleration>(manager_->getHandler<MainHandler>())->update();
 		manager_->getComponent<FighterCtrl>(manager_->getHandler<MainHandler>())->update();
 		manager_->getComponent<ShowAtOppositeSide>(manager_->getHandler<MainHandler>())->update();

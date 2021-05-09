@@ -18,6 +18,14 @@
 #include "../components/GameCtrl.h"
 #include "../components/CollisionManager.h"
 
+#include "../systems/GameCtrlSystem.h"
+#include "../systems/AsteroidsSystem.h"
+#include "../systems/FighterSystem.h"
+#include "../systems/FighterGunSystem.h"
+#include "../systems/CollisionsSystem.h"
+#include "../systems/BulletsSystem.h"
+#include "../systems/RenderSystem.h"
+
 #include "../ecs/ecs.h"
 #include "../ecs/Entity.h"
 #include "../sdlutils/InputHandler.h"
@@ -38,33 +46,19 @@ void Game::init() {
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroids.resources.json");
 	//Systems
-	gameCtrlSystem_ = mngr_.get()->addSystem<GameCtrlSystem>();
-	gameCtrlSystem_->setMngr(mngr_.get());
-	gameCtrlSystem_->init(); 
+	gameCtrlSystem_ = mngr_->addSystem<GameCtrlSystem>();
 
-	fighterSystem_ = mngr_.get()->addSystem<FighterSystem>();
-	fighterSystem_->setMngr(mngr_.get());
-	fighterSystem_->init();
+	fighterSystem_ = mngr_->addSystem<FighterSystem>();
 
-	fighterGunSystem_ = mngr_.get()->addSystem<FighterGunSystem>();
-	fighterGunSystem_->setMngr(mngr_.get());
-	fighterGunSystem_->init();
+	fighterGunSystem_ = mngr_->addSystem<FighterGunSystem>();
 
-	asteroidsSystem_ = mngr_.get()->addSystem<AsteroidsSystem>();
-	asteroidsSystem_->setMngr(mngr_.get());
-	asteroidsSystem_->init();
+	asteroidsSystem_ = mngr_->addSystem<AsteroidsSystem>();
 
-	collisionSystem_ = mngr_.get()->addSystem<CollisionSystem>();
-	collisionSystem_->setMngr(mngr_.get());
-	collisionSystem_->init();
+	collisionSystem_ = mngr_->addSystem<CollisionSystem>();
 
-	bulletsSystem_ = mngr_.get()->addSystem<BulletsSystem>();
-	bulletsSystem_->setMngr(mngr_.get());
-	bulletsSystem_->init();
+	bulletsSystem_ = mngr_->addSystem<BulletsSystem>();
 
-	renderSystem_ = mngr_.get()->addSystem<RenderSystem>();
-	renderSystem_->setMngr(mngr_.get());
-	renderSystem_->init();
+	renderSystem_ = mngr_->addSystem<RenderSystem>();
 	////Player Entidad
 	//auto *player = mngr_->addEntity();
 	//player->addComponent<Transform>(
@@ -111,10 +105,10 @@ void Game::start() {
 		bulletsSystem_->update();
 		asteroidsSystem_->update();
 		collisionSystem_->update();
-		renderSystem_->update();
 		mngr_->refresh();
 
 		sdlutils().clearRenderer();
+		renderSystem_->update();
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;

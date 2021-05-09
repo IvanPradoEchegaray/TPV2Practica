@@ -10,7 +10,6 @@
 #include "ecs.h"
 #include "Entity.h"
 #include "System.h"
-#include "../sdlutils/Messages.h"
 
 class Manager {
 public:
@@ -86,7 +85,7 @@ public:
 		return hdlrs_[ecs::hdlrIdx<T>];
 	}
 
-	inline const std::vector<Entity*>& getEntities() {
+	inline const std::vector<Entity*>& getEnteties() {
 		return entities_;
 	}
 
@@ -106,33 +105,30 @@ public:
 	}
 
 	// message
-	void send(const Message &msg) {
-		// Message needs a clone method because we don't know what is the actual type, and
-		// we need to make a copy
-		msgsQueue_.emplace_back(msg.clone());
+	/*void send(const Message &msg) {
+		// will make a copy of msg and store it in msgsQueue_
+		// **IMPORTANT:
+		//    -- Manager.h needs to see the actual type of Message, so
+		//       add #include "messages" in "game/ecs_defs.h"
+		//    -- This will not work if message are defined with
+		//       becuase emplace_back needs to copy the object but we don't
+		//       know the actual type --- see other versions of ecs that do this
+		msgsQueue_.emplace_back(msg);
 	}
-
-	//	// instead of having a clone method in the messages, we could use templates to
-	//	// creat it directly. In this case we use mngr_->send<MessageType>(a1,a2,...)
-	//	template<typename T, typename ...Ts>
-	//	void send(Ts &&...args) {
-	//		msgsQueue_.emplace_back(new T(std::forward<Ts>(args)...));
-	//	}
 
 	void flushMsgsQueue() {
+
+		// will also send those that are sent as a reaction while sending the current
+		// messages in msgsQueue_
 		for (auto j = 0u; j < msgsQueue_.size(); j++) {
-			Message *m = msgsQueue_[j];
+			auto &m = msgsQueue_[j];
 			for (auto i = 0u; i < sys_.size(); i++) {
 				if (sys_[i] != nullptr)
-					sys_[i]->receive(*m);
+					sys_[i]->receive(m);
 			}
-			delete m; // we delete the message that was created with msg.clone()
-
 		}
 		msgsQueue_.clear();
-
-	}
-
+	}*/
 
 	void refresh();
 
@@ -142,6 +138,6 @@ private:
 	std::array<Entity*, ecs::maxHdlr> hdlrs_ = { };
 	std::array<std::unique_ptr<System>, ecs::maxSystem> sys_ = { };
 
-	std::vector<Message*> msgsQueue_;
+	//std::vector<Message> msgsQueue_;
 };
 

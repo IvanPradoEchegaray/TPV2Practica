@@ -27,5 +27,5 @@ public:
 	// en la práctica 1, etc.
 	void update() override;
 
-	void receive(const Message& msg) override;
+	//void receive(const Message& msg) override;
 };

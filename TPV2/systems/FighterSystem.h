@@ -4,9 +4,10 @@
 #include "../ecs/Manager.h"
 #include "../ecs/Component.h"
 #include "../components/Transform.h"
+#include "../components/Image.h"
 #include "../components/DeAcceleration.h"
 #include "../components/FighterCtrl.h"
-//#include "../components/Gun.h"
+
 #include "../components/ShowAtOppositeSide.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/Messages.h"

@@ -20,10 +20,8 @@ public:
 	virtual void update() {
 	}
 
-	virtual void receive(const Message& msg) {
+	virtual void receive(const Message&) {
 	}
-
-	friend Entity;
 
 protected:
 	Manager *manager_;

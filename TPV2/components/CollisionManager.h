@@ -15,7 +15,7 @@
 
 class CollisionManager : public Component {
 public:
-	CollisionManager(Entity* player) : player_(player) {}
+	/*CollisionManager(Entity* player) : player_(player) {}
 	virtual ~CollisionManager() {
 	}
 
@@ -87,6 +87,6 @@ public:
 	}
 
 private:
-	Entity* player_;
+	Entity* player_;*/
 }
 ;

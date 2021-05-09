@@ -3,6 +3,8 @@
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
+#include "../sdlutils/Texture.h"
+#include "../sdlutils/SDLUtils.h"
 
 enum state { NEWGAME, PAUSED, RUNNING, GAMEOVER };
 class State : public Component {

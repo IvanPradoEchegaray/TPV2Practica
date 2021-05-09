@@ -1,5 +1,7 @@
 #pragma once
 #include <SDL_stdinc.h>
+#include "../ecs/Manager.h"
+#include "../ecs/Entity.h"
 
 enum MsgId :Uint8 {
 	Fighter_Asteroid_Collision, Bullet_Asteroid_Collision

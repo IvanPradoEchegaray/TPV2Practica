@@ -3,6 +3,7 @@
 #include "../ecs/Component.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../components/Transform.h"
+#include "../components/Image.h"
 #include "../components/DisableOnexit.h"
 #include "GameCtrlSystem.h"
 class BulletsSystem : public System

@@ -1,6 +1,7 @@
 #pragma once
 #include "GameCtrlSystem.h"
 #include "AsteroidsSystem.h"
+#include "FighterSystem.h"
 
 #include "../ecs/System.h"
 #include "../ecs/Entity.h"
@@ -9,7 +10,7 @@
 
 class CollisionSystem : public System {
 public:
-	// - si el juego est· parado no hacer nada.
+	// - si el juego estÅEparado no hacer nada.
 	// - comprobar colisiones como en la pr·ctica 1 y avisar a los sistemas
 	// correspondientes en caso de colisiones
 	void update() override;

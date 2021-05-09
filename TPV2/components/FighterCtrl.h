@@ -20,11 +20,6 @@ public:
 	virtual ~FighterCtrl() {
 	}
 
-
-	inline void setSpeed(float thrust) {
-		thrust_ = thrust_;
-	}
-
 	void update() {
 		if (ih().keyDownEvent() && ableInput_) {
 			auto &vel = tr_->getVel();
