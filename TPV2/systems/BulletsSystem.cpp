@@ -7,8 +7,8 @@ void BulletsSystem::shoot(Vector2D pos, Vector2D vel, double width, double heigh
 	Vector2D bPos = pos + Vector2D(width / 2.0f, height / 2.0f) - Vector2D(0.0f, height / 2.0f + 5.0f + 12.0f).rotate(vel.angle(Vector2D(0.0f, -1.0f)));
 	auto* bala = manager_->addEntity();
 	manager_->addComponent<Transform>(bala,bPos, bVel, 5.0f, 20.f, vel.angle(Vector2D(0.0f, -1.0f)));
-	manager_->addComponent<Image>(bala,&sdlutils().images().at("fire"));
-	manager_->addComponent<DisableOnExit>(bala);
+	manager_->addComponent<Image>(bala,&sdlutils().images().at("fire"), manager_->getComponent<Transform>(manager_->getHandler<MainHandler>()));
+	manager_->addComponent<DisableOnExit>(bala, manager_->getComponent<Transform>(manager_->getHandler<MainHandler>()), manager_, bala);
 	manager_->setGroup<Bullet_grp>(bala, true);
 	//Sonido a reproducir
 	sdlutils().soundEffects().at("fire").play();
