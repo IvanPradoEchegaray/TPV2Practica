@@ -12,7 +12,7 @@
 #include "../ecs/Manager.h"
 
 class Gun : public Component {
-public:
+/*public:
 	Gun() :
 		tr_(nullptr) {
 	}
@@ -53,6 +53,6 @@ public:
 
 private:
 	Transform* tr_;
-	Uint32 startTime_;
+	Uint32 startTime_;*/
 }
 ;

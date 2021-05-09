@@ -6,14 +6,10 @@
 
 class DeAcceleration : public Component {
 public:
-	DeAcceleration() :
-		tr_(nullptr) {
+	DeAcceleration(Transform* tr) :
+		tr_(tr) {
 	}
 	virtual ~DeAcceleration() {
-	}
-	void init() override {
-		tr_ = entity_->getComponent<Transform>();
-		assert(tr_ != nullptr);
 	}
 
 	void update() {

@@ -8,7 +8,7 @@
 
 class FramedImage : public Component {
 public:
-	FramedImage(Texture* text, int filas, int columnas, float tiempoAnim, int empty) : text_(text), tr_(nullptr), time_(0), size_(columnas, filas)
+	FramedImage(Texture* text, Transform* tr, int filas, int columnas, float tiempoAnim, int empty) : text_(text), tr_(tr), time_(0), size_(columnas, filas)
 	{
 		frame = Vector2D(0, 0);
 		auto w = text_->width() / columnas,
@@ -21,11 +21,6 @@ public:
 	};
 
 	virtual ~FramedImage() {};
-
-	void init() override {
-		tr_ = entity_->getComponent<Transform>();
-		assert(tr_ != nullptr);
-	};
 
 	void render() {
 		SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getW(), tr_->getH());

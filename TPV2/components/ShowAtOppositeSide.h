@@ -8,14 +8,10 @@
 
 class ShowAtOppositeSide : public Component {
 public:
-	ShowAtOppositeSide() :
-		tr_(nullptr) {
+	ShowAtOppositeSide(Transform* tr) :
+		tr_(tr) {
 	}
 	virtual ~ShowAtOppositeSide() {
-	}
-	void init() override {
-		tr_ = entity_->getComponent<Transform>();
-		assert(tr_ != nullptr);
 	}
 
 	void update() {

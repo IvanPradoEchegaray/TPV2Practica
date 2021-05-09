@@ -24,14 +24,13 @@ void FighterSystem::init()
 	manager_->addComponent<Transform>(player,
 		Vector2D(sdlutils().width() / 2.0f - 20, sdlutils().height() / 2.0f - 20),
 		Vector2D(0.0f, 0.0f), 20.0f, 20.0f, 0.0f);
-	manager_->addComponent<Image>(player,&sdlutils().images().at("fighter"));
-	manager_->addComponent<DeAcceleration>(player);
+	manager_->addComponent<Image>(player,&sdlutils().images().at("fighter"), manager_->getComponent<Transform>(player));
+	manager_->addComponent<DeAcceleration>(player, manager_->getComponent<Transform>(player));
 	manager_->addComponent<Health>(player,3,
 		Vector2D(sdlutils().width() * 0.02f, sdlutils().height() * 0.02f), 40.0f, 40.0f,
 		&sdlutils().images().at("heart"));
-	manager_->addComponent<FighterCtrl>(player);
-	//manager_->addComponent<Gun>(player);
-	manager_->addComponent<ShowAtOppositeSide>(player);
+	manager_->addComponent<FighterCtrl>(player, manager_->getComponent<Transform>(player));
+	manager_->addComponent<ShowAtOppositeSide>(player, manager_->getComponent<Transform>(player));
 	manager_->setHandler<MainHandler>(player);
 }
 
@@ -41,19 +40,20 @@ void FighterSystem::update()
 		manager_->getComponent<DeAcceleration>(manager_->getHandler<MainHandler>())->update();
 		manager_->getComponent<FighterCtrl>(manager_->getHandler<MainHandler>())->update();
 		manager_->getComponent<ShowAtOppositeSide>(manager_->getHandler<MainHandler>())->update();
+		if (ih().keyDownEvent()) {
+			if (ih().isKeyDown(SDLK_s) && manager_->getComponent<FighterCtrl>(manager_->getHandler<MainHandler>())->inputIsEnabled()) {
+				manager_->getSystem<FighterSystem>()->shootBullet();
+			}
+		}
 	}
 }
 
 void FighterSystem::shootBullet()
 {
-	if (ih().keyDownEvent()) {
-		if (ih().isKeyDown(SDLK_s) && manager_->getComponent<FighterCtrl>(manager_->getHandler<MainHandler>())->inputIsEnabled()) {
-			Uint32 currentTime = sdlutils().currRealTime() - startTime_;
-			if (currentTime >= 250) {
-				Transform* player_tr = manager_->getComponent<Transform>(manager_->getHandler<MainHandler>());
-				manager_->getSystem<BulletsSystem>()->shoot(player_tr->getPos(),player_tr->getVel(),player_tr->getW(), player_tr->getH());
-				startTime_ = sdlutils().currRealTime();
-			}
-		}
+	Uint32 currentTime = sdlutils().currRealTime() - startTime_;
+	if (currentTime >= 250) {
+		Transform* player_tr = manager_->getComponent<Transform>(manager_->getHandler<MainHandler>());
+		manager_->getSystem<BulletsSystem>()->shoot(player_tr->getPos(),player_tr->getVel(),player_tr->getW(), player_tr->getH());
+		startTime_ = sdlutils().currRealTime();
 	}
 }

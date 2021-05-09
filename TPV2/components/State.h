@@ -11,12 +11,11 @@ public:
 		startRect = &sdlutils().images().at("start");
 		continueRect = &sdlutils().images().at("continue");
 		gameOverRect = &sdlutils().images().at("gameover");
+		start();
 	}
 	virtual ~State() {}
 
-	void init() override { start(); }
-
-	void render() override {
+	void render() {
 		Vector2D pos = Vector2D(sdlutils().width() * 0.5f - 175, sdlutils().height() * 0.65f);
 		if (currentState == NEWGAME) {
 			SDL_Rect dest = build_sdlrect(pos, startRect->width(), startRect->height());

@@ -13,8 +13,9 @@
 
 class FighterCtrl: public Component {
 public:
-	FighterCtrl() :
-			tr_(nullptr), thrust_(0.1), speedLimit_(3.0f){
+	FighterCtrl(Transform* tr) :
+			tr_(tr), thrust_(0.1), speedLimit_(3.0f){
+		ableInput_ = false;
 	}
 	virtual ~FighterCtrl() {
 	}
@@ -22,12 +23,6 @@ public:
 
 	inline void setSpeed(float thrust) {
 		thrust_ = thrust_;
-	}
-
-	void init() override {
-		tr_ = entity_->getComponent<Transform>();
-		assert(tr_ != nullptr);
-		ableInput_ = false;
 	}
 
 	void update() {

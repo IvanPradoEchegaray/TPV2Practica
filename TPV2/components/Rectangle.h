@@ -10,7 +10,7 @@
 #include "Transform.h"
 
 class Rectangle: public Component {
-public:
+/*public:
 	Rectangle() :
 			Rectangle(build_sdlcolor(0xffffffff)) {
 	}
@@ -37,5 +37,5 @@ public:
 	}
 private:
 	SDL_Color color_;
-	Transform *tr_;
+	Transform *tr_;*/
 };

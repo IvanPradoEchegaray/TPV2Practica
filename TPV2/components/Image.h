@@ -10,17 +10,12 @@
 
 class Image: public Component {
 public:
-	Image(Texture *tex) :
-			tr_(nullptr), //
+	Image(Texture *tex, Transform* tr) :
+			tr_(tr), //
 			tex_(tex) //
 	{
 	}
 	virtual ~Image() {
-	}
-
-	void init() override {
-		tr_ = entity_->getComponent<Transform>();
-		assert(tr_ != nullptr);
 	}
 
 	void render() {

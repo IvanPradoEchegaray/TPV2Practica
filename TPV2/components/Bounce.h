@@ -8,17 +8,12 @@
 
 class Bounce: public Component {
 public:
-	Bounce() :
-			tr_(nullptr) {
+	Bounce(Transform* tr) :
+			tr_(tr) {
 	}
 	virtual ~Bounce() {
 	}
-	void init() override {
-		tr_ = entity_->getComponent<Transform>();
-		assert(tr_ != nullptr);
-	}
-
-	void update() override {
+	void update() {
 		auto &pos = tr_->getPos();
 		auto &vel = tr_->getVel();
 		auto w = tr_->getW();

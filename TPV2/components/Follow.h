@@ -8,22 +8,15 @@
 
 class Follow : public Component {
 public:
-	Follow(Entity* caza) :
-		tr_(nullptr), cazaTr_(nullptr), caza_(caza){
+	Follow(Transform* tr, Transform* cazaTr, Entity* caza) :
+		tr_(tr), cazaTr_(cazaTr), caza_(caza){
 	}
 
 	virtual ~Follow() {
 	}
 
-	void init() override {
-		tr_ = entity_->getComponent<Transform>();
-		assert(tr_ != nullptr);
 
-		cazaTr_ = caza_->getComponent<Transform>();
-		assert(cazaTr_ != nullptr);
-	}
-
-	void update() override {
+	void update() {
 		auto& p = tr_->getPos();
 		auto& v = tr_->getVel();
 		auto& q = cazaTr_->getPos();

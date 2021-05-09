@@ -12,18 +12,13 @@
 
 class Rotate : public Component {
 public:
-	Rotate() :
-		tr_(nullptr) {
+	Rotate(Transform* tr) :
+		tr_(tr) {
 	}
 	virtual ~Rotate() {
 	}
 
-	void init() override {
-		tr_ = entity_->getComponent<Transform>();
-		assert(tr_ != nullptr);
-	}
-
-	void update() override {
+	void update() {
 		if (ih().keyDownEvent()) {
 			if (ih().isKeyDown(SDLK_LEFT)) 
 			{

@@ -6,11 +6,9 @@
 class Health : public Component {
 public:
 	Health(size_t vidas, Vector2D pos, float w, float h, Texture* tex) : max_vidas_(vidas), pos_(pos), width_(w), heigth_(h), tex_(tex) {
+		resetLifes();
 	}
 	virtual ~Health() {
-	}
-	void init() override {
-		resetLifes();
 	}
 	void render() {
 		for (int i = 0; i < vidas_; i++) {

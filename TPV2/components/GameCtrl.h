@@ -12,7 +12,7 @@
 
 class GameCtrl : public Component {
 public:
-	GameCtrl(Entity* player):player_(player) {
+	/*GameCtrl(Entity* player):player_(player) {
 	}
 	virtual ~GameCtrl() {
 	}
@@ -40,6 +40,6 @@ public:
 
 
 private:
-	Entity* player_;
+	Entity* player_;*/
 }
 ;
