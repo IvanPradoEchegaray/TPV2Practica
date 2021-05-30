@@ -24,7 +24,7 @@ void FighterSystem::init()
 	player1 = manager_->addEntity();
 	manager_->addComponent<Transform>(player1,
 		Vector2D(10, sdlutils().height() / 2.0f - 20),
-		Vector2D(0.0f, 0.0f), 40.0f, 40.0f, -M_PI / 2);
+		Vector2D(0.0f, 0.0f), 40.0f, 40.0f, 90.0f);
 	manager_->addComponent<Image>(player1, &sdlutils().images().at("fighter"), manager_->getComponent<Transform>(player1));
 	manager_->addComponent<DeAcceleration>(player1, manager_->getComponent<Transform>(player1));
 	/*manager_->addComponent<Health>(player1, 3,
@@ -38,8 +38,8 @@ void FighterSystem::init()
 	player2 = manager_->addEntity();
 	manager_->addComponent<Transform>(player2,
 		Vector2D(sdlutils().width() - 50, sdlutils().height() / 2.0f - 20),
-		Vector2D(0.0f, 0.0f), 40.0f, 40.0f, M_PI/2);
-	manager_->addComponent<Image>(player2,&sdlutils().images().at("fighter2"), manager_->getComponent<Transform>(player2));
+		Vector2D(0.0f, 0.0f), 40.0f, 40.0f, -90.0f);
+	manager_->addComponent<Image>(player2, &sdlutils().images().at("fighter2"), manager_->getComponent<Transform>(player2));
 	manager_->addComponent<DeAcceleration>(player2, manager_->getComponent<Transform>(player2));
 	/*manager_->addComponent<Health>(player2,3,
 		Vector2D(sdlutils().width() * 0.02f, sdlutils().height() * 0.02f), 40.0f, 40.0f,
@@ -47,6 +47,7 @@ void FighterSystem::init()
 	manager_->addComponent<FighterCtrl>(player2, manager_->getComponent<Transform>(player2));
 	manager_->addComponent<ShowAtOppositeSide>(player2, manager_->getComponent<Transform>(player2));
 	manager_->setHandler<Player2Handler>(player2);
+	
 }
 
 void FighterSystem::update()
@@ -105,18 +106,18 @@ void FighterSystem::resetFighters()
 	player1_tr->getPos().setX(10);
 	player1_tr->getPos().setY(sdlutils().height() / 2.0f - 20);
 	//Rotacion
-	player1_tr->setRot(M_PI/2);
+	player1_tr->setRot(90.0f);
 	//Velocidad
 	auto& player1_vel = player1_tr->getVel();
 	player1_vel.setX(0);
 	player1_vel.setY(0);
 	//Reset de la posicion del player2
-	Transform* player2_tr = manager_->getComponent<Transform>(manager_->getHandler<Player1Handler>());
+	Transform* player2_tr = manager_->getComponent<Transform>(manager_->getHandler<Player2Handler>());
 	//Posicion
 	player2_tr->getPos().setX(sdlutils().width() - 50);
 	player2_tr->getPos().setY(sdlutils().height() / 2.0f - 20);
 	//Rotacion
-	player2_tr->setRot(-M_PI / 2);
+	player2_tr->setRot(-90.0f);
 	//Velocidad
 	auto& player2_vel = player2_tr->getVel();
 	player2_vel.setX(0);
