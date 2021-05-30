@@ -30,3 +30,11 @@ void BulletsSystem::update()
 		}
 	}
 }
+
+void BulletsSystem::setBulletInfo(Vector2D pos, Vector2D vel, double width, double height)
+{
+	manager_->getComponent<Transform>(manager_->getHandler<GameManager>())->getPos().set(pos);
+	manager_->getComponent<Transform>(manager_->getHandler<GameManager>())->getVel().set(vel);
+	manager_->getComponent<Transform>(manager_->getHandler<GameManager>())->setW(width);
+	manager_->getComponent<Transform>(manager_->getHandler<GameManager>())->setH(height);
+}

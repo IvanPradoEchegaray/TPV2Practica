@@ -193,18 +193,20 @@ void NetworkSystem::update() {
 		}
 
 			// change paddle position of other player
-		case _PADDLE_POS: {
-			PaddlePositionMsg *m = static_cast<PaddlePositionMsg*>(m_);
+		case _FIGHTER_POS: {
+			FighterPositionMsg*m = static_cast<FighterPositionMsg*>(m_);
 			Vector2D pos(m->x, m->y);
 			manager_->getSystem<PaddlesSystem>()->setPaddlePosition(m->id, pos);
 			break;
 		}
 
-		case _BALL_INFO_: {
-			BallInfoMsg *m = static_cast<BallInfoMsg*>(m_);
+		case _BULLET_INFO_: {
+			BulletInfoMsg*m = static_cast<BulletInfoMsg*>(m_);
 			Vector2D pos(m->pos_x, m->pos_y);
 			Vector2D vel(m->vel_x, m->vel_y);
-			manager_->getSystem<BallSystem>()->setBallInfo(pos, vel);
+			double width = m->width;
+			double height = m->height;
+			manager_->getSystem<BulletsSystem>()->setBulletInfo(pos, vel, width, height);
 
 			break;
 		}

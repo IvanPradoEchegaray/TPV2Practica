@@ -20,5 +20,7 @@ public:
 	// - si el juego está parado no hacer nada.
 	// - mover las balas y desactivar las que se salen de la ventana
 	void update() override;
+	
+	void setBulletInfo(Vector2D pos, Vector2D vel, double width, double height);
 };
 
