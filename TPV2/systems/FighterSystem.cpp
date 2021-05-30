@@ -16,7 +16,6 @@ void FighterSystem::onCollisionWithAsteroid(Entity* a)
 	player1_vel.setX(0);
 	player1_vel.setY(0);
 	//Aviso al gamectrlsystem
-	//manager_->getSystem<GameCtrlSystem>()->onFighterDeath(GameCtrlSystem::LEFT);
 }
 
 void FighterSystem::init()
@@ -24,13 +23,13 @@ void FighterSystem::init()
 	//Player1
 	player1 = manager_->addEntity();
 	manager_->addComponent<Transform>(player1,
-		Vector2D(sdlutils().width() / 10.0f - 20, sdlutils().height() / 2.0f - 20),
-		Vector2D(0.0f, 0.0f), 40.0f, 40.0f, 0.0f);
+		Vector2D(10, sdlutils().height() / 2.0f - 20),
+		Vector2D(0.0f, 0.0f), 40.0f, 40.0f, -M_PI / 2);
 	manager_->addComponent<Image>(player1, &sdlutils().images().at("fighter"), manager_->getComponent<Transform>(player1));
 	manager_->addComponent<DeAcceleration>(player1, manager_->getComponent<Transform>(player1));
-	manager_->addComponent<Health>(player1, 3,
+	/*manager_->addComponent<Health>(player1, 3,
 		Vector2D(sdlutils().width() * 0.02f, sdlutils().height() * 0.02f), 40.0f, 40.0f,
-		&sdlutils().images().at("heart"));
+		&sdlutils().images().at("heart"));*/
 	manager_->addComponent<FighterCtrl>(player1, manager_->getComponent<Transform>(player1));
 	manager_->addComponent<ShowAtOppositeSide>(player1, manager_->getComponent<Transform>(player1));
 	manager_->setHandler<Player1Handler>(player1);
@@ -38,13 +37,13 @@ void FighterSystem::init()
 	//Player2
 	player2 = manager_->addEntity();
 	manager_->addComponent<Transform>(player2,
-		Vector2D(sdlutils().width() / 10.0f * 9 - 20, sdlutils().height() / 2.0f - 20),
-		Vector2D(0.0f, 0.0f), 40.0f, 40.0f, 0.0f);
+		Vector2D(sdlutils().width() - 50, sdlutils().height() / 2.0f - 20),
+		Vector2D(0.0f, 0.0f), 40.0f, 40.0f, M_PI/2);
 	manager_->addComponent<Image>(player2,&sdlutils().images().at("fighter2"), manager_->getComponent<Transform>(player2));
 	manager_->addComponent<DeAcceleration>(player2, manager_->getComponent<Transform>(player2));
-	manager_->addComponent<Health>(player2,3,
+	/*manager_->addComponent<Health>(player2,3,
 		Vector2D(sdlutils().width() * 0.02f, sdlutils().height() * 0.02f), 40.0f, 40.0f,
-		&sdlutils().images().at("heart"));
+		&sdlutils().images().at("heart"));*/
 	manager_->addComponent<FighterCtrl>(player2, manager_->getComponent<Transform>(player2));
 	manager_->addComponent<ShowAtOppositeSide>(player2, manager_->getComponent<Transform>(player2));
 	manager_->setHandler<Player2Handler>(player2);
@@ -96,6 +95,32 @@ void FighterSystem::shootBullet()
 		manager_->getSystem<BulletsSystem>()->shoot(player_tr->getPos(),player_tr->getVel(),player_tr->getW(), player_tr->getH());
 		startTime_ = sdlutils().currRealTime();
 	}
+}
+
+void FighterSystem::resetFighters()
+{
+	//Reset de la posicion del player1
+	Transform* player1_tr = manager_->getComponent<Transform>(manager_->getHandler<Player1Handler>());
+	//Posicion
+	player1_tr->getPos().setX(10);
+	player1_tr->getPos().setY(sdlutils().height() / 2.0f - 20);
+	//Rotacion
+	player1_tr->setRot(M_PI/2);
+	//Velocidad
+	auto& player1_vel = player1_tr->getVel();
+	player1_vel.setX(0);
+	player1_vel.setY(0);
+	//Reset de la posicion del player2
+	Transform* player2_tr = manager_->getComponent<Transform>(manager_->getHandler<Player1Handler>());
+	//Posicion
+	player2_tr->getPos().setX(sdlutils().width() - 50);
+	player2_tr->getPos().setY(sdlutils().height() / 2.0f - 20);
+	//Rotacion
+	player2_tr->setRot(-M_PI / 2);
+	//Velocidad
+	auto& player2_vel = player2_tr->getVel();
+	player2_vel.setX(0);
+	player2_vel.setY(0);
 }
 
 void FighterSystem::setFighterPosition(Uint8 playerId, Vector2D pos)

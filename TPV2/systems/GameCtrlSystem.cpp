@@ -1,12 +1,14 @@
 #include "GameCtrlSystem.h"
 #include "NetworkSystem.h"
+#include "FighterSystem.h"
 
 void GameCtrlSystem::onFighterDeath(Side side) {
 	//Desactivar asteroides y balas
-	/*for (Entity* e : manager_->getEnteties()) {
-		if (manager_->hasGroup<Asteroid_grp>(e) || manager_->hasGroup<Bullet_grp>(e))
+	for (Entity* e : manager_->getEnteties()) {
+		if (manager_->hasGroup<Bullet_grp>(e))
 			manager_->setActive(e, false);
 	}
+	/*
 	manager_->getComponent<Health>(manager_->getHandler<Player1Handler>())->loseLife();
 	if (manager_->getComponent<Health>(manager_->getHandler<Player1Handler>())->isDead()) {
 		manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(GAMEOVER);
@@ -63,7 +65,7 @@ void GameCtrlSystem::update()
 		if (ih().isKeyDown(SDLK_SPACE) && manager_->getComponent<State>(manager_->getHandler<GameManager>())->getState() != RUNNING) {
 			manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(RUNNING);
 			//Crea 10 asteroides
-			manager_->getSystem<AsteroidsSystem>()->addAsteroids(10);
+			//manager_->getSystem<AsteroidsSystem>()->addAsteroids(10);
 		}
 		else if (ih().isKeyDown(SDL_SCANCODE_P)) {
 			manager_->getSystem<NetworkSystem>()->switchId();
@@ -112,5 +114,10 @@ void GameCtrlSystem::resetGame()
 {
 	manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(NEWGAME);
 	score_[0] = score_[1] = 0;
-	onAsteroidsExtinction();
+	//Desactivar asteroides y balas
+	for (Entity* e : manager_->getEnteties()) {
+		if (manager_->hasGroup<Bullet_grp>(e))
+			manager_->setActive(e, false);
+	}
+	manager_->getSystem<FighterSystem>()->resetFighters();
 }

@@ -35,6 +35,8 @@ public:
 
 	void shootBullet();
 
+	void resetFighters();
+
 	void setFighterPosition(Uint8 playerId, Vector2D pos);
 protected:
 	Uint32 startTime_;

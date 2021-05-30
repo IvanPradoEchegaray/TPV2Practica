@@ -20,6 +20,7 @@ void CollisionSystem::update()
 					//Sonido a reproducir
 					sdlutils().soundEffects().at("bangSmall").play();
 					manager_->getSystem<GameCtrlSystem>()->onFighterDeath(GameCtrlSystem::LEFT);
+					manager_->getSystem<FighterSystem>()->resetFighters();
 				}
 				//Colision con player 2
 				else if (Collisions::collidesWithRotation(bullet_tr->getPos(), bullet_tr->getW(), bullet_tr->getH(), bullet_tr->getRot(),
@@ -28,6 +29,7 @@ void CollisionSystem::update()
 					//Sonido a reproducir
 					sdlutils().soundEffects().at("bangSmall").play();
 					manager_->getSystem<GameCtrlSystem>()->onFighterDeath(GameCtrlSystem::RIGHT);
+					manager_->getSystem<FighterSystem>()->resetFighters();
 				}
 			}
 		}
