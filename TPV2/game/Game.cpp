@@ -36,12 +36,26 @@
 
 Game::Game() {
 	mngr_.reset(new Manager());
+	//Systems
+	gameCtrlSystem_ = nullptr;
+
+	fighterSystem_ = nullptr;
+
+	fighterGunSystem_ = nullptr;
+
+	asteroidsSystem_ = nullptr;
+
+	collisionSystem_ = nullptr;
+
+	bulletsSystem_ = nullptr;
+
+	renderSystem_ = nullptr;
 }
 
 Game::~Game() {
 }
 
-void Game::init() {
+void Game::init(const char* host, Uint16 port) {
 
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroids.resources.json");
@@ -59,25 +73,6 @@ void Game::init() {
 	bulletsSystem_ = mngr_->addSystem<BulletsSystem>();
 
 	renderSystem_ = mngr_->addSystem<RenderSystem>();
-	////Player Entidad
-	//auto *player = mngr_->addEntity();
-	//player->addComponent<Transform>(
-	//		Vector2D(sdlutils().width() / 2.0f - 20, sdlutils().height() / 2.0f - 20),
-	//		Vector2D(0.0f,0.0f), 20.0f, 20.0f, 0.0f);
-	//player->addComponent<Image>(&sdlutils().images().at("fighter"));
-	//player->addComponent<DeAcceleration>();
-	//player->addComponent<Health>(3,
-	//	Vector2D(sdlutils().width() * 0.02f, sdlutils().height() * 0.02f), 40.0f, 40.0f, 
-	//	&sdlutils().images().at("heart"));
-	//player->addComponent<FighterCtrl>();
-	//player->addComponent<Gun>();
-	//player->addComponent<ShowAtOppositeSide>();
-	//gameManager Entidad
-	//auto* gameManager = mngr_->addEntity();
-	//gameManager->addComponent<State>();
-	//gameManager->addComponent<GameCtrl>(player);
-	//gameManager->addComponent<AsteroidsManager>(player);
-	//gameManager->addComponent<CollisionManager>(player);
 
 }
 
@@ -99,13 +94,13 @@ void Game::start() {
 			continue;
 		}
 
+		mngr_->refresh();
 		gameCtrlSystem_->update();
 		fighterSystem_->update();
 		fighterGunSystem_->update();
 		bulletsSystem_->update();
 		asteroidsSystem_->update();
 		collisionSystem_->update();
-		mngr_->refresh();
 
 		sdlutils().clearRenderer();
 		renderSystem_->update();

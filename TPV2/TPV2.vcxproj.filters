@@ -123,6 +123,9 @@
     <ClCompile Include="ecs\Manager.cpp">
       <Filter>Source Files\ecs</Filter>
     </ClCompile>
+    <ClCompile Include="systems\NetworkSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="json\JSON.h">
@@ -280,6 +283,15 @@
     </ClInclude>
     <ClInclude Include="ecs\System.h">
       <Filter>Header Files\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="game\network_types.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\netwrok_messages.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\NetworkSystem.h">
+      <Filter>Header Files\systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
