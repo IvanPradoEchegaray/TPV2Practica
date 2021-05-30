@@ -6,14 +6,14 @@
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/SDLUtils.h"
 
-enum state { NEWGAME, PAUSED, RUNNING, GAMEOVER };
+enum state : Uint8 { NEWGAME = 0, PAUSED, RUNNING, GAMEOVER };
 class State : public Component {
 public:
 	State() {
 		startRect = &sdlutils().images().at("start");
 		continueRect = &sdlutils().images().at("continue");
 		gameOverRect = &sdlutils().images().at("gameover");
-		start();
+		currentState = NEWGAME;
 	}
 	virtual ~State() {}
 
@@ -37,16 +37,14 @@ public:
 
 	}
 	
-	void start() { currentState = NEWGAME; }
-	void run() { currentState = RUNNING; }
-	void pause() { currentState = PAUSED; }
-	void gameOver() { currentState = GAMEOVER; }
+	void changeState(state state) { currentState = state; }
+	void changeState(Uint8 state) { currentState = state; }
 
-	const state& getState() { return currentState; }
+	const Uint8& getState() { return currentState; }
 
 private:
 	Texture* startRect, *continueRect, *gameOverRect;
-	state currentState;
+	Uint8 currentState;
 }
 ;
 

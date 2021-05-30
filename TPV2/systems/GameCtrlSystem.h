@@ -20,12 +20,19 @@ public:
 	// - desactivar todas las balas, etc.
 	void onAsteroidsExtinction();
 	// - devuelve el estado del juego.
-	state getGameState();
+	Uint8 getGameState();
 	// - inicializar el estado del juego si es necesario, etc.
 	void init() override;
 	// - si el juego estÅEparado y el jugador pulsa SDLK_SPACE cambia el estado como
 	// en la pr·ctica 1, etc.
 	void update() override;
 
-	//void receive(const Message& msg) override;
+	//Messages
+	void startGame();
+	void changeState(Uint8 state, Uint8 left_score, Uint8 right_score);
+	void resetGame();
+
+private:
+	std::array<Uint8, 2> score_;
+	Uint8 maxScore_;
 };

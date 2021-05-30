@@ -180,14 +180,14 @@ void NetworkSystem::update() {
 			// start game request
 		case _START_GAME_REQUEST_: {
 			if (isMaster_) {
-				manager_->getSystem<GameManagerSystem>()->startGame();
+				manager_->getSystem<GameCtrlSystem>()->startGame();
 			}
 			break;
 		}
 
 		case _STATE_CHANGED_: {
 			StateChangedMessage *m = static_cast<StateChangedMessage*>(m_);
-			manager_->getSystem<GameManagerSystem>()->changeState(m->state_,
+			manager_->getSystem<GameCtrlSystem>()->changeState(m->state_,
 					m->left_score_, m->right_score_);
 			break;
 		}
@@ -215,7 +215,7 @@ void NetworkSystem::update() {
 			DissConnectMsg *m = static_cast<DissConnectMsg*>(m_);
 			isGameReday_ = false;
 			names_[1 - m->id] = remotePlayerName_ = "N/A";
-			manager_->getSystem<GameManagerSystem>()->resetGame();
+			manager_->getSystem<GameCtrlSystem>()->resetGame();
 			if (!isMaster_) {
 				SDLNet_UDP_Close(conn_);
 				conn_ = SDLNet_UDP_Open(port_);
@@ -228,7 +228,7 @@ void NetworkSystem::update() {
 	if (isGameReday_ && SDL_GetTicks() - lastTimeActive_ > 3000) {
 		isGameReday_ = false;
 		names_[1 - id_] = remotePlayerName_ = "N/A";
-		manager_->getSystem<GameManagerSystem>()->resetGame();
+		manager_->getSystem<GameCtrlSystem>()->resetGame();
 		if (!isMaster_) {
 			SDLNet_UDP_Close(conn_);
 			conn_ = SDLNet_UDP_Open(port_);
@@ -246,14 +246,14 @@ void NetworkSystem::sendPaddlePosition(Vector2D pos) {
 		return;
 
 	// we prepare a message that includes all information
-	PaddlePositionMsg *m = static_cast<PaddlePositionMsg*>(m_);
-	m->_type = _PADDLE_POS;
+	FighterPositionMsg *m = static_cast<FighterPositionMsg*>(m_);
+	m->_type = _FIGHTER_POS;
 	m->x = pos.getX();
 	m->y = pos.getY();
 	m->id = id_;
 
 	// set the message length and the address of the other player
-	p_->len = sizeof(PaddlePositionMsg);
+	p_->len = sizeof(FighterPositionMsg);
 	p_->address = otherPlayerAddress_;
 
 	// send the message
@@ -296,15 +296,15 @@ void NetworkSystem::sendBallInfo(Vector2D pos, Vector2D vel) {
 		return;
 
 	// we prepare a message that includes all information
-	BallInfoMsg *m = static_cast<BallInfoMsg*>(m_);
-	m->_type = _BALL_INFO_;
+	BulletInfoMsg *m = static_cast<BulletInfoMsg*>(m_);
+	m->_type = _BULLET_INFO_;
 	m->pos_x = pos.getX();
 	m->pos_y = pos.getY();
 	m->vel_x = vel.getX();
 	m->vel_y = vel.getY();
 
 	// set the message length and the address of the other player
-	p_->len = sizeof(BallInfoMsg);
+	p_->len = sizeof(BulletInfoMsg);
 	p_->address = otherPlayerAddress_;
 
 	// send the message

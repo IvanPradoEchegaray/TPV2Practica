@@ -66,7 +66,7 @@ void Game::init(const char* host, Uint16 port) {
 
 	fighterGunSystem_ = mngr_->addSystem<FighterGunSystem>();
 
-	asteroidsSystem_ = mngr_->addSystem<AsteroidsSystem>();
+	//asteroidsSystem_ = mngr_->addSystem<AsteroidsSystem>();
 
 	collisionSystem_ = mngr_->addSystem<CollisionSystem>();
 
@@ -99,7 +99,7 @@ void Game::start() {
 		fighterSystem_->update();
 		fighterGunSystem_->update();
 		bulletsSystem_->update();
-		asteroidsSystem_->update();
+		//asteroidsSystem_->update();
 		collisionSystem_->update();
 
 		sdlutils().clearRenderer();

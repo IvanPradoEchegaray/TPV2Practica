@@ -1,4 +1,5 @@
 #include "GameCtrlSystem.h"
+#include "NetworkSystem.h"
 
 void GameCtrlSystem::onFighterDeath() {
 	//Desactivar asteroides y balas
@@ -8,10 +9,10 @@ void GameCtrlSystem::onFighterDeath() {
 	}
 	manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->loseLife();
 	if (manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->isDead()) {
-		manager_->getComponent<State>(manager_->getHandler<GameManager>())->gameOver();
+		manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(GAMEOVER);
 		manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->resetLifes();
 	}
-	manager_->getComponent<State>(manager_->getHandler<GameManager>())->pause();
+	manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(PAUSED);
 }
 
 void GameCtrlSystem::onAsteroidsExtinction() {
@@ -21,12 +22,12 @@ void GameCtrlSystem::onAsteroidsExtinction() {
 			manager_->setActive(e, false);
 	}
 
-	manager_->getComponent<State>(manager_->getHandler<GameManager>())->gameOver();
+	manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(GAMEOVER);
 	manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->resetLifes();
-	manager_->getComponent<State>(manager_->getHandler<GameManager>())->pause();
+	manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(PAUSED);
 }
 
-state GameCtrlSystem::getGameState() {
+Uint8 GameCtrlSystem::getGameState() {
 	return manager_->getComponent<State>(manager_->getHandler<GameManager>())->getState();
 }
 
@@ -44,9 +45,12 @@ void GameCtrlSystem::update()
 {
 	if (ih().keyDownEvent()) {
 		if (ih().isKeyDown(SDLK_SPACE) && manager_->getComponent<State>(manager_->getHandler<GameManager>())->getState() != RUNNING) {
-			manager_->getComponent<State>(manager_->getHandler<GameManager>())->run();
+			manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(RUNNING);
 			//Crea 10 asteroides
 			manager_->getSystem<AsteroidsSystem>()->addAsteroids(10);
+		}
+		else if (ih().isKeyDown(SDL_SCANCODE_P)) {
+			manager_->getSystem<NetworkSystem>()->switchId();
 		}
 	}
 	//Desactvar input en start, pausa y gameover
@@ -56,22 +60,37 @@ void GameCtrlSystem::update()
 		manager_->getComponent<FighterCtrl>(manager_->getHandler<MainHandler>())->enableInput(true);
 }
 
-/*void GameCtrlSystem::receive(const Message& msg)
+void GameCtrlSystem::startGame()
 {
-	switch (msg.id_)
-	{
-	case Fighter_Asteroid_Collision:
-		const FighterAsteroidCollision& m = static_cast<const FighterAsteroidCollision&>(msg);
-		manager_->getComponent<Health>(m.player_)->loseLife();
-		if (manager_->getComponent<Health>(m.player_)->isDead())
-			onFighterDeath();
-		break;
-	case Bullet_Asteroid_Collision:
-		const BulletAsteroidCollision& ms = static_cast<const BulletAsteroidCollision&>(msg);
-		manager_->getSystem<AsteroidsSystem>()->onCollisionWithBullet(ms.asteroid_, ms.bullet_);
-		manager_->getSystem<BulletsSystem>()->onCollisionWithAsteroid(ms.bullet_,ms.asteroid_);
-		if (manager_->getSystem<AsteroidsSystem>()->getNumAsteroids() <= 0)
-			onAsteroidsExtinction();
-		break;
+	if (getGameState() == RUNNING)
+		return;
+
+	if (!manager_->getSystem<NetworkSystem>()->isGameReady())
+		return;
+
+	auto isMaster = manager_->getSystem<NetworkSystem>()->isMaster();
+
+	if (isMaster) {
+		manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(RUNNING);
+		//manager_->getSystem<BallSystem>()->initBall();
+		manager_->getSystem<NetworkSystem>()->sendStateChanged(getGameState(),
+			score_[0], score_[1]);
 	}
-}*/
+	else {
+		manager_->getSystem<NetworkSystem>()->sendStartGameRequest();
+	}
+}
+
+void GameCtrlSystem::changeState(Uint8 state, Uint8 left_score, Uint8 right_score)
+{
+	manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(state);
+	score_[0] = left_score;
+	score_[1] = right_score;
+}
+
+void GameCtrlSystem::resetGame()
+{
+	manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(NEWGAME);
+	score_[0] = score_[1] = 0;
+	onAsteroidsExtinction();
+}
