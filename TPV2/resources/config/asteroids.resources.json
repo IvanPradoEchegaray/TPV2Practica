@@ -15,7 +15,8 @@
     { "id" : "fire", "file" : "resources/images/fire.png" },
     { "id" : "continue", "file" : "resources/images/continue.png" },
     { "id" : "gameover", "file" : "resources/images/game_over.png" },
-    { "id" : "start", "file" : "resources/images/start.png" }
+    { "id" : "start", "file" : "resources/images/start.png" },
+    { "id" : "arrow", "file" : "resources/images/arrow.png"}
   ],
   
   "messages" : [
