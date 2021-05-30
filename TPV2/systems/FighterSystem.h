@@ -20,7 +20,7 @@ class Message;
 class FighterSystem:public System
 {
 public:
-	FighterSystem() {}
+	FighterSystem() : player1(nullptr), player2(nullptr) {}
 	// - poner el caza en el centro con velocidad 0 y rotaci?n 0. No hace falta
 	// desactivar la entidad (no dibujarla si el juego est? parado en RenderSystem).
 	// - avisar al GameCtrlSystem que se ha muerto el caza (se puede tambi?n avisar
@@ -34,7 +34,12 @@ public:
 	void update() override;
 
 	void shootBullet();
+
+	void setFighterPosition(Uint8 playerId, Vector2D pos);
 protected:
 	Uint32 startTime_;
+
+	Entity* player1;
+	Entity* player2;
 };
 

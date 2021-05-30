@@ -196,7 +196,7 @@ void NetworkSystem::update() {
 		case _FIGHTER_POS: {
 			FighterPositionMsg*m = static_cast<FighterPositionMsg*>(m_);
 			Vector2D pos(m->x, m->y);
-			manager_->getSystem<PaddlesSystem>()->setPaddlePosition(m->id, pos);
+			manager_->getSystem<FighterSystem>()->setFighterPosition(m->id, pos);
 			break;
 		}
 
