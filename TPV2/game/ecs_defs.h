@@ -68,6 +68,7 @@ class AsteroidsSystem;
 class CollisionSystem;
 class FighterSystem;
 class RenderSystem;
+class NetworkSystem;
 
 #define _SYS_LIST_ \
 GameCtrlSystem, \
@@ -76,4 +77,5 @@ FighterGunSystem, \
 AsteroidsSystem, \
 CollisionSystem, \
 FighterSystem, \
-RenderSystem
+RenderSystem,\
+NetworkSystem
