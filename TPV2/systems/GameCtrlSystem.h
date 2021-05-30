@@ -17,6 +17,7 @@ public:
 		LEFT = 0, //
 		RIGHT
 	};
+	GameCtrlSystem();
 	// - a este mÈtodo se le va a llamar cuando muere el caza.
 	// - desactivar los asteroides y las balas, actualizar el estado del juego, etc.
 	void onFighterDeath(Side side);
@@ -30,10 +31,11 @@ public:
 	// - si el juego estÅEparado y el jugador pulsa SDLK_SPACE cambia el estado como
 	// en la pr·ctica 1, etc.
 	void update() override;
-
+	//Score
 	const auto& getScore() {
 		return score_;
 	}
+	void resetScore();
 	//Messages
 	void startGame();
 	void changeState(Uint8 state, Uint8 left_score, Uint8 right_score);

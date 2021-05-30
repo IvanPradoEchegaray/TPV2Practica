@@ -2,6 +2,10 @@
 #include "NetworkSystem.h"
 #include "FighterSystem.h"
 
+GameCtrlSystem::GameCtrlSystem():
+	score_(), //
+	maxScore_(3){}
+
 void GameCtrlSystem::onFighterDeath(Side side) {
 	//Desactivar asteroides y balas
 	for (Entity* e : manager_->getEnteties()) {
@@ -26,8 +30,9 @@ void GameCtrlSystem::onFighterDeath(Side side) {
 
 	if (score_[0] < maxScore_ && score_[1] < maxScore_)
 		manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(PAUSED);
-	else
+	else {
 		manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(GAMEOVER);
+	}
 
 	manager_->getSystem<NetworkSystem>()->sendStateChanged(getGameState(), score_[0],
 		score_[1]);
@@ -63,8 +68,11 @@ void GameCtrlSystem::update()
 {
 	if (ih().keyDownEvent()) {
 		if (ih().isKeyDown(SDLK_SPACE) && manager_->getComponent<State>(manager_->getHandler<GameManager>())->getState() != RUNNING) {
+			//Si esta en gameOver se resetea el score
+			if (manager_->getComponent<State>(manager_->getHandler<GameManager>())->getState() == GAMEOVER)
+				resetScore();
 			manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(RUNNING);
-			//Crea 10 asteroides
+			//Crea 10 asteroides(Modo 1 jugador)
 			//manager_->getSystem<AsteroidsSystem>()->addAsteroids(10);
 		}
 		else if (ih().isKeyDown(SDL_SCANCODE_P)) {
@@ -80,6 +88,11 @@ void GameCtrlSystem::update()
 		manager_->getComponent<FighterCtrl>(manager_->getHandler<Player1Handler>())->enableInput(true);
 		manager_->getComponent<FighterCtrl>(manager_->getHandler<Player2Handler>())->enableInput(true);
 	}
+}
+
+void GameCtrlSystem::resetScore()
+{
+	score_[0] = score_[1] = 0;
 }
 
 void GameCtrlSystem::startGame()
@@ -113,7 +126,7 @@ void GameCtrlSystem::changeState(Uint8 state, Uint8 left_score, Uint8 right_scor
 void GameCtrlSystem::resetGame()
 {
 	manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(NEWGAME);
-	score_[0] = score_[1] = 0;
+	resetScore();
 	//Desactivar asteroides y balas
 	for (Entity* e : manager_->getEnteties()) {
 		if (manager_->hasGroup<Bullet_grp>(e))

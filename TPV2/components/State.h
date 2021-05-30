@@ -34,7 +34,6 @@ public:
 			SDL_Rect dest = build_sdlrect(pos, startRect->width(), startRect->height());
 			startRect->render(dest, 0);
 		}
-
 	}
 	
 	void changeState(state state) { currentState = state; }

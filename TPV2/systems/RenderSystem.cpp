@@ -54,6 +54,17 @@ void RenderSystem::drawScore() {
 
 void RenderSystem::drawMsgs() {
 	manager_->getComponent<State>(manager_->getHandler<GameManager>())->render();
+	//Indicador de jugador
+	Texture* pointerRect = &sdlutils().images().at("arrow");
+	if (manager_->getSystem<GameCtrlSystem>()->getGameState() != RUNNING) {
+		Vector2D posPointer;
+		if (manager_->getSystem<NetworkSystem>()->getId() == 0)
+			posPointer = Vector2D(15, sdlutils().height() / 2.0f - 60);
+		else
+			posPointer = Vector2D(sdlutils().width() - 45, sdlutils().height() / 2.0f - 60);
+		SDL_Rect dest = build_sdlrect(posPointer, 30, 30);
+		pointerRect->render(dest, 0);
+	}
 }
 
 void RenderSystem::drawNames() {
