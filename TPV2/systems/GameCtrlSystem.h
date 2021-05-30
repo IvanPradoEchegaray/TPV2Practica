@@ -12,11 +12,11 @@
 
 class GameCtrlSystem : public System
 {
+public:
 	enum Side {
 		LEFT = 0, //
 		RIGHT
 	};
-public:
 	// - a este método se le va a llamar cuando muere el caza.
 	// - desactivar los asteroides y las balas, actualizar el estado del juego, etc.
 	void onFighterDeath(Side side);
