@@ -18,6 +18,7 @@ public:
 	void start();
 private:
 	std::unique_ptr<Manager> mngr_;
+	System* networkSys_;
 	System* gameCtrlSystem_;
 	System* fighterSystem_;
 	System* fighterGunSystem_;

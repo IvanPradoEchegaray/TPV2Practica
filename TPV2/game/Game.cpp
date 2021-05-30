@@ -25,6 +25,7 @@
 #include "../systems/CollisionsSystem.h"
 #include "../systems/BulletsSystem.h"
 #include "../systems/RenderSystem.h"
+#include "../systems/NetworkSystem.h"
 
 #include "../ecs/ecs.h"
 #include "../ecs/Entity.h"
@@ -37,6 +38,8 @@
 Game::Game() {
 	mngr_.reset(new Manager());
 	//Systems
+	networkSys_ = nullptr;
+
 	gameCtrlSystem_ = nullptr;
 
 	fighterSystem_ = nullptr;
@@ -56,10 +59,16 @@ Game::~Game() {
 }
 
 void Game::init(const char* host, Uint16 port) {
+	// ask the player for a name
+	std::string playerName;
+	std::cout << "Enter you name: ";
+	std::cin >> playerName;
 
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroids.resources.json");
 	//Systems
+	networkSys_ = mngr_->addSystem<NetworkSystem>(host, port, playerName);
+
 	gameCtrlSystem_ = mngr_->addSystem<GameCtrlSystem>();
 
 	fighterSystem_ = mngr_->addSystem<FighterSystem>();
@@ -95,12 +104,14 @@ void Game::start() {
 		}
 
 		mngr_->refresh();
+		
 		gameCtrlSystem_->update();
 		fighterSystem_->update();
 		fighterGunSystem_->update();
 		bulletsSystem_->update();
 		//asteroidsSystem_->update();
 		collisionSystem_->update();
+		networkSys_->update();
 
 		sdlutils().clearRenderer();
 		renderSystem_->update();

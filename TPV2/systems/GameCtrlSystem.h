@@ -12,10 +12,14 @@
 
 class GameCtrlSystem : public System
 {
+	enum Side {
+		LEFT = 0, //
+		RIGHT
+	};
 public:
 	// - a este método se le va a llamar cuando muere el caza.
 	// - desactivar los asteroides y las balas, actualizar el estado del juego, etc.
-	void onFighterDeath();
+	void onFighterDeath(Side side);
 	// - a este método se le va a llamar cuando no haya más asteroides.
 	// - desactivar todas las balas, etc.
 	void onAsteroidsExtinction();
@@ -27,6 +31,9 @@ public:
 	// en la práctica 1, etc.
 	void update() override;
 
+	const auto& getScore() {
+		return score_;
+	}
 	//Messages
 	void startGame();
 	void changeState(Uint8 state, Uint8 left_score, Uint8 right_score);

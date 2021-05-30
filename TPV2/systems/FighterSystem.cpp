@@ -1,4 +1,5 @@
 #include "FighterSystem.h"
+#include "GameCtrlSystem.h"
 #include "NetworkSystem.h"
 
 void FighterSystem::onCollisionWithAsteroid(Entity* a)
@@ -15,22 +16,7 @@ void FighterSystem::onCollisionWithAsteroid(Entity* a)
 	player1_vel.setX(0);
 	player1_vel.setY(0);
 	//Aviso al gamectrlsystem
-	manager_->getSystem<GameCtrlSystem>()->onFighterDeath();
-
-
-	//Reset de la posicion del player2
-	Transform* player2_tr = manager_->getComponent<Transform>(manager_->getHandler<Player2Handler>());
-	//Posicion
-	player2_tr->getPos().setX(sdlutils().width() / 2.0f - 20);
-	player2_tr->getPos().setY(sdlutils().height() / 2.0f - 20);
-	//Rotacion
-	player2_tr->setRot(0);
-	//Velocidad
-	auto& player2_vel = player2_tr->getVel();
-	player2_vel.setX(0);
-	player2_vel.setY(0);
-	//Aviso al gamectrlsystem
-	manager_->getSystem<GameCtrlSystem>()->onFighterDeath();
+	//manager_->getSystem<GameCtrlSystem>()->onFighterDeath(GameCtrlSystem::LEFT);
 }
 
 void FighterSystem::init()

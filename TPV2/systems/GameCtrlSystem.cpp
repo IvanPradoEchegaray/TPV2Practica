@@ -1,18 +1,34 @@
 #include "GameCtrlSystem.h"
 #include "NetworkSystem.h"
 
-void GameCtrlSystem::onFighterDeath() {
+void GameCtrlSystem::onFighterDeath(Side side) {
 	//Desactivar asteroides y balas
-	for (Entity* e : manager_->getEnteties()) {
+	/*for (Entity* e : manager_->getEnteties()) {
 		if (manager_->hasGroup<Asteroid_grp>(e) || manager_->hasGroup<Bullet_grp>(e))
 			manager_->setActive(e, false);
 	}
-	manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->loseLife();
-	if (manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->isDead()) {
+	manager_->getComponent<Health>(manager_->getHandler<Player1Handler>())->loseLife();
+	if (manager_->getComponent<Health>(manager_->getHandler<Player1Handler>())->isDead()) {
 		manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(GAMEOVER);
-		manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->resetLifes();
+		manager_->getComponent<Health>(manager_->getHandler<Player1Handler>())->resetLifes();
 	}
-	manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(PAUSED);
+	manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(PAUSED);*/
+	assert(getGameState() == RUNNING); // this should be called only when game is runnig
+
+	if (side == LEFT) {
+		score_[1]++;
+	}
+	else {
+		score_[0]++;
+	}
+
+	if (score_[0] < maxScore_ && score_[1] < maxScore_)
+		manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(PAUSED);
+	else
+		manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(GAMEOVER);
+
+	manager_->getSystem<NetworkSystem>()->sendStateChanged(getGameState(), score_[0],
+		score_[1]);
 }
 
 void GameCtrlSystem::onAsteroidsExtinction() {
@@ -23,7 +39,7 @@ void GameCtrlSystem::onAsteroidsExtinction() {
 	}
 
 	manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(GAMEOVER);
-	manager_->getComponent<Health>(manager_->getHandler<MainHandler>())->resetLifes();
+	manager_->getComponent<Health>(manager_->getHandler<Player1Handler>())->resetLifes();
 	manager_->getComponent<State>(manager_->getHandler<GameManager>())->changeState(PAUSED);
 }
 
@@ -54,10 +70,14 @@ void GameCtrlSystem::update()
 		}
 	}
 	//Desactvar input en start, pausa y gameover
-	if (manager_->getComponent<State>(manager_->getHandler<GameManager>())->getState() != RUNNING)
-		manager_->getComponent<FighterCtrl>(manager_->getHandler<MainHandler>())->enableInput(false);
-	else
-		manager_->getComponent<FighterCtrl>(manager_->getHandler<MainHandler>())->enableInput(true);
+	if (manager_->getComponent<State>(manager_->getHandler<GameManager>())->getState() != RUNNING) {
+		manager_->getComponent<FighterCtrl>(manager_->getHandler<Player1Handler>())->enableInput(false);
+		manager_->getComponent<FighterCtrl>(manager_->getHandler<Player2Handler>())->enableInput(true);
+	}
+	else {
+		manager_->getComponent<FighterCtrl>(manager_->getHandler<Player1Handler>())->enableInput(true);
+		manager_->getComponent<FighterCtrl>(manager_->getHandler<Player2Handler>())->enableInput(true);
+	}
 }
 
 void GameCtrlSystem::startGame()

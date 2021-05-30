@@ -239,7 +239,7 @@ void NetworkSystem::update() {
 
 }
 
-void NetworkSystem::sendPaddlePosition(Vector2D pos) {
+void NetworkSystem::sendFighterPosition(Vector2D pos) {
 
 	// if the other player is not connected do nothing
 	if (!isGameReday_)
@@ -290,7 +290,7 @@ void NetworkSystem::sendStateChanged(Uint8 state, Uint8 left_score,
 
 }
 
-void NetworkSystem::sendBallInfo(Vector2D pos, Vector2D vel) {
+void NetworkSystem::sendBulletInfo(Vector2D pos, Vector2D vel) {
 	// if the other player is not connected do nothing
 	if (!isGameReday_)
 		return;
