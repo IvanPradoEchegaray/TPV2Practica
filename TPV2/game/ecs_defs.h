@@ -54,10 +54,12 @@ struct Asteroid_grp;
 	Asteroid_grp
 
 // handlers
-struct MainHandler;
+struct Player1Handler;
+struct Player2Handler;
 struct GameManager;
 #define _HDLRS_LIST_  \
-MainHandler, \
+Player1Handler, \
+Player2Handler, \
 GameManager
 
 // systems

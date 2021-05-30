@@ -31,7 +31,7 @@ void AsteroidsSystem::addAsteroids(int n)
 		if (sdlutils().rand().nextInt(0, 10) < 3) {
 			//Debug Log
 			std::cout << "--" << colu << ", " << fil << " TIPO B --\n";
-			manager_->addComponent<Follow>(asteroide, manager_->getComponent<Transform>(asteroide), manager_->getComponent<Transform>(manager_->getHandler<MainHandler>()));
+			manager_->addComponent<Follow>(asteroide, manager_->getComponent<Transform>(asteroide), manager_->getComponent<Transform>(manager_->getHandler<Player1Handler>()));
 			manager_->addComponent<FramedImage>(asteroide, manager_->getComponent<Transform>(asteroide), &sdlutils().images().at("asteroid_gold"), 5, 6, 2, 0);
 			manager_->addComponent<AsteroidType>(asteroide, 'b');
 		}
@@ -71,7 +71,7 @@ void AsteroidsSystem::onCollisionWithBullet(Entity* a, Entity* b)
 			if (sdlutils().rand().nextInt(0, 10) < 3) {
 				//Debug Log
 				//std::cout << "--" << colu << ", " << fil << " TIPO B --\n";
-				manager_->addComponent<Follow>(asteroide, manager_->getComponent<Transform>(asteroide), manager_->getComponent<Transform>(manager_->getHandler<MainHandler>()));
+				manager_->addComponent<Follow>(asteroide, manager_->getComponent<Transform>(asteroide), manager_->getComponent<Transform>(manager_->getHandler<Player1Handler>()));
 				manager_->addComponent<FramedImage>(asteroide, manager_->getComponent<Transform>(asteroide), &sdlutils().images().at("asteroid_gold"), 5, 6, 2, 0);
 				manager_->addComponent<AsteroidType>(asteroide, 'b');
 			}

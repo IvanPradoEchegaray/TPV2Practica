@@ -39,6 +39,7 @@ public:
 protected:
 	Uint32 startTime_;
 
+	Uint8 playerId_ = 0;
 	Entity* player1;
 	Entity* player2;
 };

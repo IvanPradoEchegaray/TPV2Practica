@@ -9,7 +9,7 @@ void CollisionSystem::update()
 				Entity* asteroid = manager_->getEnteties()[i];
 				Transform* asteroid_tr = manager_->getComponent<Transform>(asteroid);
 				//Si hay choque con el caza
-				Transform* player_tr = manager_->getComponent<Transform>(manager_->getHandler<MainHandler>());
+				Transform* player_tr = manager_->getComponent<Transform>(manager_->getHandler<Player1Handler>());
 				if (Collisions::collidesWithRotation(asteroid_tr->getPos(), asteroid_tr->getW(), asteroid_tr->getH(), asteroid_tr->getRot(),
 					player_tr->getPos(), player_tr->getW(), player_tr->getH(), player_tr->getRot())) {
 					manager_->getSystem<FighterSystem>()->onCollisionWithAsteroid(asteroid);
